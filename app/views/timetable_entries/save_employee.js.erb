@@ -1,0 +1,7 @@
+<%if !@timetable_entry.valid?%>
+	$("#form-errors").html('<%= escape_javascript(render 'shared/error_messages', :target => @timetable_entry) %>');
+	$("#modal-box").dialog("open");
+<% else %>
+$("tr[data-classtiming-id = <%= @timetable_entry.class_timing_id %>]").children("td[data-weekday-id =<%= @timetable_entry.weekday_id %>]").html("<%= escape_javascript(render "timetable_entry", :e=> @timetable_entry) %>");	
+		$("#modal-form")[0].reset();
+<% end %>

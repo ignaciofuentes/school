@@ -1,0 +1,32 @@
+<div id="header_bg">
+  <div id="header">
+    <div id="main-menu">
+      <%= link_to t("header.dashboard"), :controller => "users", :action => "dashboard" %>
+      <% this_user = User.find(session[:user_id]) if session[:user_id] %>
+      <%  if this_user.student? || this_user.employee? %>
+        <%= link_to t("header.calendar"), :controller => "calendar" %>
+      <% end %>
+      <%= link_to t("header.students"), :controller => "student", :action => "index" \
+        if this_user.admin? %>
+      <%= link_to t("header.attendance"), :controller => "student_attendance", :action => "index" \
+        if this_user.admin? %>
+      <%= link_to t("header.settings"), :controller => "configuration", :action => "index" \
+        if this_user.admin? %> <!--
+      <%= link_to t("header.news"), :controller => "news", :action => "index" \
+        if this_user.admin? %> -->
+      <%= link_to t("header.timetable"), :controller => "timetable", :action => "index" \
+        if this_user.admin? %>
+      <% if this_user.admin? %>
+        <a href="#" class="menuanchorclass" rel="anylinkmenu1"><%= t("header.more")%> ▼</a>
+      <% end %>
+
+    </div>
+    <div id="header_link" >
+      <%= t("header.logged_in_as")%>
+      <%= link_to this_user.first_name, :controller => 'users', :action => 'profile',
+        :id => this_user.username %> &nbsp;|&nbsp;
+      <%= link_to t("header.messages"),:controller => "reminder", :action => "index" %>(<%= render :partial => 'layouts/reminder_count' %>)&nbsp;|&nbsp;
+      <%= link_to t("header.log_out"), :controller => 'users', :action => 'logout' %>  &nbsp;&nbsp;
+    </div>
+  </div>
+</div>

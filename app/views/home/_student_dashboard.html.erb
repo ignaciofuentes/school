@@ -1,0 +1,29 @@
+<li>
+	<%= link_to image_tag("dashboard_icons/student_details.png") + "<br>Student Details".html_safe, current_user.authenticatable, {:title => "View your profile"}%>
+</li>
+
+<li>
+	<%= link_to image_tag("dashboard_icons/news.png") + "<br>Campus News".html_safe, {:controller => "news", :action => "index"}, {:title => "Search for news/announcements"}%>
+</li>
+
+<li>
+	<%= link_to image_tag("dashboard_icons/timetable.png") + "<br>Schedule".html_safe, schedule_student_path(current_user.authenticatable), {:title => t("dashboard.buttons.timetable")}%>
+</li>
+
+<% unless @user.check_reminders == 0 %>
+<div class="reminder1">
+	<%= link_to "", {:controller => "reminder", :action => "index"},
+	:class => "option_buttons", :id => "reminders_button", :title => "         Student messages."%>
+	<li>
+		<%= link_to image_tag("dashboard_icons/reminders.png") + "<br>Reminders".html_safe, {:controller => "reminder", :action => "index"}, {:title => "Student messages"}%>
+	</li>
+	<div class ="count"><%= render :partial => 'layouts/reminder_count' %></div>
+</div>
+<% else %>
+<li>
+	<%= link_to image_tag("dashboard_icons/reminders.png") + "<br>Reminders".html_safe, {:controller => "reminder", :action => "index"}, {:title => "Student messages"}%>
+</li>
+<% end %>
+<li>
+	<%= link_to image_tag("dashboard_icons/academics.png") + "<br>Academics".html_safe, academic_status_student_path(current_user.authenticatable), {:title => "Academic Reports"}%>
+</li>

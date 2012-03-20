@@ -1,0 +1,123 @@
+<%= content_for :head do%>
+<%= stylesheet_link_tag "pdf", :media=> "print"%>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+	
+	var chart = new Highcharts.Chart({
+		chart:{
+			renderTo: "chart",
+			type: "column"
+		},
+		title:{
+			text: "grades"
+		},
+		xAxis: {
+			labels:{
+				enabled: false
+			},
+			tickWidth: 0
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: 'Grade'
+			}
+		},
+		credits:{
+			text: "Hekima Solutions",
+			href: "http://www.tucolegionenlinea.com",
+			style: {
+				cursor: 'pointer',
+				color: '#909090',
+				fontSize: '10px'
+			}
+		},
+		legend:{
+			enabled: false
+		},
+		tooltip: {
+		         formatter: function() {
+		                   return '<b>'+ this.point.name +'</b><br/>'+
+		                this.y;
+		         }
+		      },
+		series: [{
+		         name: 'Grades',
+		         data: 
+					<%= (@evaluation.grades.order(:student_id)).map { |grade| [grade.student.full_name, grade.value.to_f]}.inspect.html_safe %>		
+		      }]
+
+	});
+	$('#button').button();
+	$('#button').click(function() {
+	  var series = chart.series[0],
+	      newType = series.type == 'line' ? 'column' : 'line';
+	    changeType(series, newType);
+	})
+	function changeType(series, newType) {
+	    var dataArray = [],
+	        points = series.data;
+
+	    series.chart.addSeries({
+	        type: newType,
+	        name: series.name,
+	        color: series.color,
+	        data: series.options.data
+	    }, false);
+
+	    series.remove();
+	}
+});
+
+</script>
+<% end %>
+<%= content_for :breadcrumb do%>
+<%= link_to @evaluation.batch_subject.batch.course.full_name, course_path(@evaluation.batch_subject.batch.course) %> &raquo; <%= link_to @evaluation.batch_subject.batch.full_name, batch_path(@evaluation.batch_subject.batch) %> 
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag "menu_icons/examinations.png", :id=>"menu_icon" %>
+	</div>
+	<div class="grid_9">
+		<h1><%= @evaluation.name %></h1>
+		<h3><%= @evaluation.batch_subject.subject.name %> <%= @evaluation.batch_subject.batch.name %></h3>
+		<h3><%= @evaluation.percentage %> %,<%= @evaluation.period.name %></h3>
+	</div>
+	<%= render :partial => 'shared/back_button' %>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<div class="container_12">
+	<% unless flash[:notice].nil? %>
+	<p class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+
+	<% unless flash[:warn_notice].nil? %>
+	<div id="errorExplanation" class="errorExplanation"><%= flash[:warn_notice] %> </div>
+	<% end %>
+
+	<div class="grid_3" id="menu_small">
+		<h2><%= t"general.options"%>:</h2>
+		<ul>
+			<%= render 'evaluations/evaluation_options' %>
+		</ul>
+	</div>
+
+	<div class="grid_9">
+		<h2>Description</h2>
+		<%= @evaluation.description %>
+	</div>
+</div>
+<div class="clearfix">&nbsp;</div>
+<div class="container_12">
+	<h2>Grades</h2>
+	<input type="button" id="button" value="Change Chart Type" />
+	<div id="chart" style="height:500px">
+
+	</div>
+
+</div>
+

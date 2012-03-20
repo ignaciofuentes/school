@@ -1,0 +1,117 @@
+<%=content_for :head do%>
+<%= javascript_include_tag "jquery.dataTables.min" %>
+<%= stylesheet_link_tag 'demo_table_jui' %>
+		  <script type="text/javascript" charset="utf-8">
+		 
+		$(function(){
+		
+		var oTable =$('#users').dataTable({
+			"bProcessing": true,
+			"bServerSide": true,
+			"sPaginationType":"full_numbers",
+			"oLanguage": {"sUrl": "../datatables.<%= current_user.language.name %>.txt"},
+			"sAjaxSource": "/users/data_table",
+			 "bJQueryUI": true,
+				"aoColumns": [
+					{"sWidth": "25%"},
+					{"sWidth": "25%"},
+					{"sWidth": "25%"}
+		        ]        
+			});
+			$("#users tbody").click(function(event) {
+					$(oTable.fnSettings().aoData).each(function (){
+						$(this.nTr).removeClass('row_selected');
+					});
+					var selected_row = $(event.target.parentNode);
+					$( "#dialog-confirm" ).dialog({
+								close: function(event, ui) {
+									if($("#user_authenticatable_id").val() == ""){
+										
+									} 
+									else{
+										var authenticatable_id = $("#user_authenticatable_id").val();
+										var selector = "span[data-authenticatable_id = "+authenticatable_id+"]";
+										
+									}  
+									},
+								resizable: false,
+								height:160,
+								modal: true,
+								buttons: {
+									"Yes": function() {
+										var authenticatable_id = selected_row.find("span").attr("data-authenticatable_id");
+										var authenticatable_type = selected_row.find("span").attr("data-authenticatable_type");
+										var full_name  = selected_row.find("td.sorting_1").html();
+										$("#user_authenticatable_id").val(authenticatable_id);
+										$("#user_authenticatable_type").val(authenticatable_type);
+										$("#selected_person").html("La persona seleccionada es: "+ full_name+"("+authenticatable_type+")");
+										$(this).dialog("close");
+									},
+									Cancel: function() {
+										$( this ).dialog( "close" );
+									}
+								}
+							});
+					
+				});
+		})
+	</script>
+	  <%end %>
+<h2><%= t"user.user_details"%></h2>
+
+      <div class="grid_6">
+	<p>
+        <%= u.label :email%> <span class="necessary-field">*</span>
+        <%= u.text_field :email, :class=>"text" %>
+	</p>
+      </div>
+      <div class="grid_6">
+	<p>
+        <%= u.label :password%><span class="necessary-field">*</span>
+        <%= u.password_field :password, :class=>"text" %>
+</p>
+      </div>
+
+
+	<div class="grid_6">
+	<p>
+        <%= u.label :language_id%> * <br />
+        <%= u.collection_select :language_id, Language.all, :id, :name, {:class=>"select"}%>
+	</p>
+      </div>
+	  
+	  	<div class="grid_6">
+	<p>
+        <%= u.label :authenticable_type, "Privilegios"%> * <br />
+		<% Privilege.all.each do |p|%>
+		<%= check_box_tag :privilege_ids, p.id, @user.privileges.include?(p), :name=> "user[privilege_ids][]"%>
+		<%= u.label :privilege_ids, p.name, :value=> p.id%>
+		<%end%>
+		<%= u.hidden_field :authenticatable_id%>
+		<%= u.hidden_field :authenticatable_type%>
+	</p>
+      </div>
+	  <div id="selected_person" class="grid_6">
+		Persona selecionada: 
+		</div>
+	  <table id="users" class="large">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Add</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+
+			</tbody>
+		</table>
+		
+<div id="dialog-confirm" title="Select User">
+	<p>
+		<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+		The user for this person will be created. Are you sure?
+		</p>
+</div>
+	  

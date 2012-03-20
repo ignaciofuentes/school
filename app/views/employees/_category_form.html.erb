@@ -1,0 +1,33 @@
+<%- form_for :category do |c| -%>
+
+<%= render 'shared/error_messages', :target => @category %>
+
+  <div id="form-content">
+    <div class="label-field-pair">
+      <label for="category_name">Name</label>
+      <div class="text-input-bg"> <%= c.text_field :name %> </div>
+    </div>
+
+    <div class="label-field-pair">
+      <label for="category_prefix">Prefix</label>
+      <div class="text-input-bg"> <%= c.text_field :prefix %> </div>
+    </div>
+
+    <div class="label-checkbox-pair">
+      <label class="status" for="status">Status</label>
+      <div id="radio-buttons">
+      <%= c.radio_button  "status", "true", :checked => "checked" %>
+      <label class="label_for_status" for="add_grade_status_true">Active</label>
+
+      <%= c.radio_button  "status", "false" %>
+      <label class="label_for_status" for="add_grade_status_false">Inactive</label>
+      </div>
+    </div>
+
+    <div id="submit-button">
+	<%= c.submit button_label %>
+    </div>
+  </div>
+
+
+  <%- end -%>

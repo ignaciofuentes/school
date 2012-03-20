@@ -1,0 +1,82 @@
+<%= content_for :breadcrumb do%>
+
+	<% end %>
+
+	<div class="container_12">
+		<div class="grid_1">
+			<%= image_tag "menu_icons/courses.png" %>
+		</div>
+		<div class="grid_9">
+			<h1><%= @batch_subject.subject.name %></h1>
+		</div>
+		<%= render :partial => 'shared/back_button' %>	
+	</div>
+
+	<div class="clearfix">&nbsp;</div>
+	<h2>Grades For <%= @student.full_name%></h2>
+	<%=form_for [@batch_subject, @student], :url => save_cualitative_grades_batch_subject_student_path(@batch_subject, @student) do |f|%>
+	<div class="container_12">
+		<% count =0 %>
+	<% @batch_subject.batch.evaluation_structure.periods.each do |period|%>
+		
+<h2><%= period.name %></h2>
+<table>
+	<thead>
+		<tr>
+			<th>Competencia</th>
+			<th>Valor</th>
+			<th>Indicador</th>
+			<th>Valor</th>
+		</tr>
+	</thead>
+	<tbody>	
+		<% @batch_subject.competences.for_period(period).each do |competence|%>
+		<% cgrade = competence.cualitative_grades.for_student(@student)
+		c_id = nil
+		c_value_id = nil
+		if cgrade.exists?
+			c_id = cgrade.first.id
+			c_value_id = cgrade.first.cualitative_value_id
+		end
+			%>
+		<%= hidden_field_tag "student[cualitative_grades_attributes][#{count}][id]", c_id%>
+		<%= hidden_field_tag "student[cualitative_grades_attributes][#{count}][cualitative_gradeable_id]", competence.id%>
+		<%= hidden_field_tag "student[cualitative_grades_attributes][#{count}][cualitative_gradeable_type]", competence.class.name%>
+		<tr>				
+			<td><%= competence.description%></td>
+			<td>
+			<%= collection_select("student[cualitative_grades_attributes][#{count}]", :cualitative_value_id, CualitativeValue.all, :id, :name, :prompt=>true, :selected=> c_value_id)%> 
+				<% count += 1 %>
+				</td>
+			<td></td>
+			<td></td>	
+		</tr>
+		<% competence.indicators.each do |indicator|%>
+		<% cgrade = indicator.cualitative_grades.for_student(@student)
+		c_id = nil
+		c_value_id = nil
+		if cgrade.exists?
+			c_id = cgrade.first.id
+			c_value_id = cgrade.first.cualitative_value_id
+		end
+			%>
+		<%= hidden_field_tag "student[cualitative_grades_attributes][#{count}][id]", c_id%>
+		<%= hidden_field_tag "student[cualitative_grades_attributes][#{count}][cualitative_gradeable_id]", indicator.id%>
+		<%= hidden_field_tag "student[cualitative_grades_attributes][#{count}][cualitative_gradeable_type]", indicator.class.name%>
+		<tr>				
+			<td></td>
+			<td></td>
+			<td><%= indicator.description%></td>
+			<td>
+			<%= collection_select("student[cualitative_grades_attributes][#{count}]", :cualitative_value_id, CualitativeValue.all, :id, :name, :prompt=>true, :selected=> c_value_id)%> 
+				<% count += 1 %></td>	
+		</tr>
+		<%end%>
+		<%end%>
+			</tbody>
+		</table>
+		<%end%>
+
+		<%=f.submit "Assign Cualitative Values", :class=>"submit"%>
+	</div>
+	<%end%>

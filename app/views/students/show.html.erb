@@ -1,0 +1,168 @@
+<%= content_for :breadcrumb do%>
+	<%= link_to  t("students.students"), students_path %> &raquo; <%=  @student.full_name %> 
+	<% end %>
+
+	<div class="container_12">
+		<div class="grid_1">
+			<%= image_tag("menu_icons/students_search.png") %>
+		</div>
+		<div class="grid_9">
+			<h1><%= @student.first_name %> <%= @student.middle_name %> <%= @student.last_name %></h1>
+		</div>
+		<%= render :partial => 'shared/back_button' %>
+	</div>
+
+	<div class="clearfix">&nbsp;</div>
+
+	<div class="container_12">
+
+		<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+		<div class="grid_4">
+			<h2><%= t"profile.picture" %></h2>
+			<div id="profile_picture_display">
+				<% unless @student.image.blank? %>
+				<%= image_tag @student.image_url(:thumb) %>
+				<% else %>
+				<%= image_tag "misc/student.png" %>
+				<% end %>
+			</div>
+		</div>
+		<div class="grid_5">
+			<h2><%= t"profile.main_info" %></h2>
+			<div id ="student_main_info">
+				<h3> <%= t"students.course" %>: <%= @student.batch.course.full_name %> </h3>
+				<br />
+				<h3> <%= t"students.batch" %>: <%= @student.batch.name %> </h3>
+				<br />
+				<h3> <%= t"students.unique_id" %>: <%= @student.unique_id %> </h3>
+				<br />
+				<h3><%= t"students.email" %>: <%= @student.email %></h3>
+				<br />
+				<h3><%= t"students.phone1" %>: <%= @student.phone1 %></h3>
+				<br />		 
+				<h3><%= t"students.phone2" %>: <%= @student.phone2 %></h3>
+				<br />
+
+			</div>
+		</div>
+		<div class="grid_3" id="menu_small">
+			<h2><%= t"general.options" %>:</h2>
+			<ul>	
+				<li><%= link_to t("students.reports"), batch_evaluations_path(@student.batch) %></li>
+				<li><%= link_to "Final Grades", final_grades_student_path(@student, :batch_id=> @student.batch.id) %></li>
+				<li><%= link_to "Historico", student_batch_students_path(@student) %></li>
+				<li><%= link_to t("students.guardians"), student_relationships_path(@student.id)%></li>
+				<li><%= link_to t("students.send_email"), :controller => "student",
+				:action => "email", :id => @student.id %></li>			
+				<li>
+					<%= link_to t("general.edit"), edit_student_path(@student)%>
+				</li>
+				<li>
+					<%= link_to t("general.pdf_report"),
+					{:controller => "student", :action => "profile_pdf", :id => @student.id},:target => '_blank', :class=> 'user_button' %>
+				</li>
+				
+				<li><%= link_to t("general.delete"), :controller => 'student',
+				:action => 'remove', :id => @student.id %></li>
+			
+			</ul>
+		</div>
+	</div>
+
+	<div class="clearfix">&nbsp;</div>
+
+	<div class="container_12">
+		<h2><%= t"students.personal_details" %></h2>
+		<div class="grid_3">
+			<h3><%= t"students.admission_date" %></h3>
+			<h5><%= l(@student.admission_date)  unless @student.admission_date.nil? %></h5>
+			<h3><%= t"students.nationality_id" %></h3>
+			<h5><%= @student.nationality.name unless @student.nationality_id.nil? %></h5>
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.date_of_birth" %></h3>
+			<h5><%= l @student.date_of_birth unless @student.date_of_birth.nil? %></h5>
+			<h3><%= t"students.blood_group" %></h3>
+			<h5><%= @student.blood_group %></h5>
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.gender" %></h3>
+			<h5><%= @student.gender_as_text %></h5>
+			<h3><%= t"students.language" %></h3>
+			<h5><%= @student.language %></h5>
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.student_category_id" %></h3>
+			<% if @student.student_category.nil? %>
+			<h5>No categories selected</h5>
+			<% else %>
+			<h5><%= @student.student_category.name unless @student.student_category.nil? %></h5>
+			<%end%>
+			<h3><%= t"students.religion" %></h3>
+			<h5><%= @student.religion %></h5>
+		</div>
+	</div>
+	<div class="clearfix">&nbsp;</div>
+	<div class="container_12">
+		<h2><%= t"students.contact_details" %></h2>
+		<div class="grid_3">
+			<h3><%= t"students.address" %></h3>
+			<h5><%= @address %></h5>
+			<h3><%= t"students.phone1" %></h3>
+			<h5><%= @student.phone1 %></h5>
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.city" %></h3>
+			<h5><%= @student.city %></h5>
+			<h3><%= t"students.phone2" %></h3>
+			<h5><%= @student.phone2 %></h5>	 
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.state" %></h3>
+			<h5><%= @student.state %></h5> 
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.country_id" %></h3>
+			<h5><%= @student.country.name unless @student.country_id.nil? %></h5> 
+		</div> 
+
+</div>
+<div class="clearfix">&nbsp;</div>
+<div class="container_12">
+	<h2><%= t"students.additional_details" %></h2>
+		<% unless  @additional_fields.empty? %>
+
+		<% @additional_fields.each do |field| %>
+		<%= field.name %>
+		<h5><% detail = StudentAdditionalDetails.find_by_additional_field_id_and_student_id(field.id,@student.id) %></h5>
+		<%= detail.additional_info unless detail.nil?%> 
+		<% end %>
+
+
+		<% this_user = User.find(session[:user_id]) if session[:user_id] %>
+		<% unless this_user.student? %>
+		<% detail = StudentAdditionalDetails.find_by_student_id(@student.id) %>
+		<% unless detail.nil? %>
+		<span> (<%= link_to "Edit Addditional Details", :controller => 'student', :action => 'edit_admission4', :id => @student.id %>)</span>
+		<% else %>
+		<span> (<%= link_to "Add Addditional Details", :controller => 'student', :action => 'admission4', :id => @student.id %>)</span>
+		<% end %>
+		<% end  %>
+
+
+		<% end %>
+
+		<% unless @previous_data.nil? %>
+	</div>
+	<div class="clearfix">&nbsp;</div>
+	<div class="container_12">
+		<h2>Previous Details</h2>
+
+		<h3>Previous Institution</h3>
+		<h5><%= link_to @previous_data.institution,:action=>'show_previous_details', :id => @student.id %></h5>
+
+		<% end %>
+
+
+	</div>

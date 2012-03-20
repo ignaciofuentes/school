@@ -1,0 +1,12 @@
+	<h2><%= @timetable_entry.batch_subject.subject.name unless @timetable_entry.nil? %></h2>
+
+<%= form_for [@batch, @timetable_entry], :url=> save_employee_batch_timetable_entry_path(@batch, @timetable_entry), :html=> {:remote=> true} do |f| %>
+
+  
+<div id="form-errors">
+</div>
+
+	<%=f.collection_select :employee_id, @teachers,:id, :full_name, {:prompt => 'Select Employee' }, :class=> "select" %>	
+ 
+<% end %>
+

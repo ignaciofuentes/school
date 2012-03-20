@@ -1,0 +1,4 @@
+$("#added-subjects").append('<%= escape_javascript(render :partial=> "student/student_previous_subject_mark", :object => @previous_subject) %>');
+$(".resetable")[0].reset();
+$("#subject").hide();
+$("#added-subjects").effect("highlight", 2000);

@@ -1,0 +1,53 @@
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag("menu_icons/timetable.png") %>
+	</div>
+	<div class="grid_9">
+			<h1>TimeTable</h1>
+	</div>
+		<%= render :partial => 'shared/back_button' %>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  
+  <div class="container_12">
+	<div class="grid_12" id="icondock_small">
+
+		<ul>
+			<li>
+				<%= link_to(evaluation_structures_path) do %>
+					Evaluation Structure
+					<span>Create and modify the schools evaluation structure</span>
+					<% end %>
+			</li>
+			
+			<li>
+				<%= link_to  ({:controller => "schedules", :action => "index"}) do %>
+					<%= t"menu.timetable.set_schedules" %>
+					<span><%= t"menu.timetable.select_edit_schedules" %></span>
+					<% end %>
+			</li>
+			
+			<li>
+				<%= link_to  ({:controller => "schedules", :action => "index"}) do %>
+					<%= t"menu.timetable.view_timetables" %>
+					<span><%= t"menu.timetable.view_timetable_class" %></span>
+					<% end %>
+			</li>
+			
+			<li>
+				<%= link_to  ({:controller => "schedules", :action => "index"}) do %>
+					<%= t"menu.timetable.institutional_timetable" %>
+					<span><%= t"menu.timetable.view_institutional_timetable" %></span>
+					<% end %>
+			</li>
+			
+			
+			</ul>
+  </div>
+</div>

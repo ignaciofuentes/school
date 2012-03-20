@@ -1,0 +1,118 @@
+<%= content_for :breadcrumb do%>
+	<%= link_to  t("students.students"), students_path %> &raquo; <%=  @guardian.full_name %> 
+	<% end %>
+
+	<div class="container_12">
+		<div class="grid_1">
+			<%= image_tag("menu_icons/students_search.png") %>
+		</div>
+		<div class="grid_9">
+			<h1><%= @guardian.full_name %></h1>
+		</div>
+		<%= render :partial => 'shared/back_button' %>
+	</div>
+
+	<div class="clearfix">&nbsp;</div>
+
+	<div class="container_12">
+
+		<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+		<div class="grid_4">
+			<h2><%= t"profile.picture" %></h2>
+			<div id="profile_picture_display">
+				<% unless @guardian.image.blank? %>
+				<%= image_tag @guardian.image_url(:thumb) %>
+				<% else %>
+				<%= image_tag "misc/student.png" %>
+				<% end %>
+			</div>
+		</div>
+		<div class="grid_5">
+			<h2><%= t"profile.main_info" %></h2>
+			<div id ="student_main_info">
+				<h3> <%= t"students.course" %>:  </h3>
+				<br />
+				<h3> <%= t"students.batch" %>: </h3>
+				<br />
+				<h3> <%= t"students.unique_id" %>: </h3>
+				<br />
+				<h3><%= t"students.email" %>: <%= @guardian.email %></h3>
+				<br />
+				<h3><%= t"students.phone1" %>: </h3>
+				<br />		 
+				<h3><%= t"students.phone2" %>: </h3>
+				<br />
+
+			</div>
+		</div>
+		<div class="grid_3" id="menu_small">
+			<h2><%= t"general.options" %>:</h2>
+			<ul>	
+				<li>
+					<%= link_to t("general.edit"), edit_guardian_path(@guardian)%>
+				</li>
+
+				<li><%= link_to t("general.delete"), :controller => 'guardian',
+				:action => 'remove', :id => @guardian.id %></li>
+			
+			</ul>
+		</div>
+	</div>
+
+	<div class="clearfix">&nbsp;</div>
+
+	<div class="container_12">
+		<h2><%= t"students.personal_details" %></h2>
+		<div class="grid_3">
+			<h3><%= t"students.admission_date" %></h3>
+			
+			<h3><%= t"students.nationality_id" %></h3>
+			
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.date_of_birth" %></h3>
+			<h5><%= @guardian.dob.strftime("%d %b, %Y") unless @guardian.dob.nil? %></h5>
+			<h3><%= t"students.blood_group" %></h3>
+			
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.gender" %></h3>
+			<h5><%= @guardian.gender_as_text %></h5>
+			<h3><%= t"students.language" %></h3>
+			
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.student_category_id" %></h3>
+			
+			<h3><%= t"students.religion" %></h3>
+			
+		</div>
+	</div>
+	<div class="clearfix">&nbsp;</div>
+	<div class="container_12">
+		<h2><%= t"students.contact_details" %></h2>
+		<div class="grid_3">
+			<h3><%= t"students.address" %></h3>
+		
+			<h3><%= t"students.phone1" %></h3>
+			<h5><%= @guardian.office_phone1 %></h5>
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.city" %></h3>
+			<h5><%= @guardian.city %></h5>
+			<h3><%= t"students.phone2" %></h3>
+			<h5><%= @guardian.office_phone2 %></h5>	 
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.state" %></h3>
+			<h5><%= @guardian.state %></h5> 
+		</div>
+		<div class="grid_3">
+			<h3><%= t"students.country_id" %></h3>
+			<h5><%= @guardian.country.name unless @guardian.country_id.nil? %></h5> 
+		</div> 
+
+</div>
+<div class="clearfix">&nbsp;</div>
+

@@ -1,0 +1,68 @@
+<%= content_for :breadcrumb do%>
+<%= link_to 'Settings', :controller=>"configuration" %> &raquo; <%= link_to t("courses.courses_title"), courses_path %> &raquo; <%= link_to @batch.course.full_name, @course %> &raquo; <%= link_to @batch.full_name, @batch %> &raquo; Sub
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag "menu_icons/examinations.png" %>
+	</div>
+	<div class="grid_9">
+		<h1><%= @batch.name %></h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<div class="container_12">
+	<% unless flash[:notice].nil? %>
+	<p class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+
+	<% unless flash[:warn_notice].nil? %>
+	<div id="errorExplanation" class="errorExplanation"><%= flash[:warn_notice] %> </div>
+	<% end %>
+
+	<div class="grid_3" id="menu_small">
+		<h2><%= t"general.options"%>:</h2>
+		<ul>
+			<%= render 'batches/batch_options' %>
+			<%if !@batch_subject.nil? %>
+			<li><%= link_to "Add Evaluation", new_batch_subject_evaluation_path(@batch_subject) %></li>
+			<% end %>
+		</ul>
+	</div>
+
+	<div class="grid_9">
+		<table class="medium">
+			<h2>Evaluaciones</h2>
+			<thead>
+				<tr>
+					<th><%= t("batches.subject")%></th>
+					<th><%= t"general.name"%></th>
+					<th>Lapso</th>					
+					<th>Porcentaje</th>
+					<th>Edit / Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @evaluations.each do |evaluation| %>
+				<tr class="tr-<%= cycle('odd', 'even')%>">
+					<td><%=link_to evaluation.batch_subject.subject.name, batch_batch_subject_path(@batch, evaluation.batch_subject) %></td>
+					<td><%= link_to evaluation.name, [evaluation.batch_subject, evaluation] %></td>
+					<td><%=evaluation.period.name%></td>
+					<td><%=evaluation.percentage%>%</td>					
+					<td>
+		<%= link_to 'Edit', edit_batch_subject_evaluation_path(evaluation.batch_subject, evaluation)%> |
+		<%= link_to('Delete', [evaluation.batch_subject, evaluation], :method => :delete, :confirm => 'Are you sure?') %>
+	</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+
+	</div>
+</div>
+

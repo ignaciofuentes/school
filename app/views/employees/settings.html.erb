@@ -1,0 +1,76 @@
+<div class="container_12">
+	<div class="grid_1">
+		<img src="/images/HR/show_hr.png" alt="" />
+	</div>
+	<div class="grid_9">
+		<h1>Settings</h1>
+		<h3>HR Settings</h3>
+	</div>
+	<div class="grid_2">
+		<%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+	</div>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<% unless flash[:notice].nil? %>
+<p class="flash-msg"> <%= flash[:notice] %> </p>
+<% end %>
+
+
+<div class="container_12">
+	<div class="grid_12" id="icondock_small">
+		<ul>
+
+			<li>
+				<%= link_to :controller=>"employee", :action=>"add_category" do%>
+				Add employee category
+				<span>Add and edit employee category</span>
+				<% end %>
+			</li>
+
+			<li>
+				<%= link_to :controller=>"employee", :action=>"add_position" do%>
+				Add employee position
+				<span>Add and edit employee position.</span>
+				<% end %>
+			</li>
+
+			<li>
+				<%= link_to :controller=>"employee", :action=>"add_department" do%>
+				Add employee department
+				<span>Add and edit employee department</span>
+				<% end %>
+			</li>
+
+			<li>
+				<%= link_to :controller=>"employee", :action=>"add_grade" do%>
+				Add employee grade
+				<span>Add and edit employee grade</span>
+				<% end %>
+			</li>
+
+			<li>
+				<%= link_to :controller=>"payroll", :action=>"add_category" do%>
+				Add payroll category
+				<span>Add and edit employee payroll category</span>
+				<% end %>
+			</li>
+
+			<li>
+				<%= link_to :controller=>"employee", :action=>"add_bank_details" do%>
+				Add bank details 
+				<span>Add and edit bank details</span>
+				<% end %>
+			</li>
+
+			<li>
+				<%= link_to :controller=>"employee", :action=>"add_additional_details" do%>
+				Add additional details
+				<span>Add and edit additional details for employee admission forms</span>
+				<% end %>
+			</li>
+
+		</ul>
+	</div>
+</div>

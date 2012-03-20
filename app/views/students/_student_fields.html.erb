@@ -1,0 +1,199 @@
+<div class="container_12">
+
+<% unless flash[:notice].nil? %>
+<p class="flash-msg"> <%= flash[:notice] %> </p>
+<% end %>
+
+<h5><%= t"forms.fields_marked_with"%> <strong>*</strong> <%= t"forms.must_be_filled"%>.</h5>
+<div class="clearfix">&nbsp;</div>
+
+<h2>Admision</h2>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<div id="tabs">
+
+	<ul>
+		<li><a href="#tabs-1"><%= t"students.personal_details"%></a></li>
+		<li><a href="#tabs-2"><%= t"students.contact_details" %></a></li>
+		<li><a href="#tabs-3"><%= t"forms.upload"%></a></li>
+		<li><a href="#tabs-4"><%= t"students.additional_details" %></a></li>
+	</ul>
+	<div id="tabs-1">
+		<div class="container_12">
+			<div class="grid_6 alpha">
+				<%=f.label :unique_id%><span class="necessary-field">*</span>
+				<div class="text-input-bg-admission">
+					<%= f.text_field :unique_id, :class=>"text" %>
+				</div>
+			</div>
+
+
+			<div class="grid_6 omega">
+				<%=f.label :admission_date%><span class="necessary-field">*</span>
+				<div class="text-input-bg-admission">
+					<%= f.text_field :admission_date, :class=> "text date_picker" %>
+				</div>
+			</div>
+			<div class="grid_6 alpha">
+				<p>
+					<%=f.label :first_name%><strong>*</strong> 
+					<%= f.text_field :first_name, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6 omega">
+				<p>
+					<%=f.label :middle_name%>
+					<%= f.text_field :middle_name, :class=>"text" %>
+				</p>
+			</div>
+			<div class="grid_6 alpha">
+				<p>
+					<%=f.label :last_name%><strong>*</strong>
+					<%= f.text_field :last_name, :class=>"text" %>
+				</p>
+
+			</div>
+
+			<div class="grid_6 omega">
+				<p>
+					<%=f.label :date_of_birth%> <strong>*</strong>
+					<%= f.text_field :date_of_birth, :class=> "text date_picker" %>
+				</p>
+
+			</div>
+
+			<div class="grid_6 alpha">
+				<p>
+					<%=f.label :gender%>
+					<%= f.radio_button "gender", "m", :checked => true %>
+					<label>Male</label>
+					<%= f.radio_button "gender", "f" %>
+					<label>Female</label>
+				</p>
+			</div>
+			
+			<div class="grid_6">
+				<p>
+					<%=f.label :nationality_id%>
+					<div class="text-input-bg"><%= select :student, :nationality_id, Country.all.map {|c| [c.name, c.id]}, :selected => 191 %></div>
+				</p>
+			</div>
+			
+			<div class="grid_6 suffix_6 alpha">
+				<p>
+					<%=f.label :batch_ids, "Batch"%>
+					<div class="text-input-bg"><%= f.collection_select(:batch_ids, Batch.eligible, :id,:full_name, {}, {:name => "student[batch_ids][]"}) %></div>
+				</p>
+			</div>
+
+			<div class="grid_6 suffix_6 alpha">
+				<p>
+					<%=f.label :blood_group%>
+					<div class="text-input-bg">
+						<%= select :student, :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"] %>
+					</div>
+				</p>
+			</div>
+
+			<div class="grid_6 alpha">
+				<p>
+					<%=f.label :birth_place%>
+					<%= f.text_field :birth_place, :class=>"text" %>
+				</p>
+			</div>
+			<div class="grid_6 suffix_6 alpha">
+				<p>
+					<%=f.label :student_category_id%>
+					<%= f.select :student_category_id, StudentCategory.all.map {|c| [c.name, c.id]}, { :prompt => 'Select category' } %>
+				</p>
+			</div>
+
+
+			<div class="grid_6 suffix_6 alpha">
+				<p>
+					<%=f.label :religion%>
+					<%= f.text_field :religion, :class=>"text" %>
+				</p>
+			</div>
+			<div class="clearfix">&nbsp;</div>
+		</div>
+	</div>
+	<div id="tabs-2">
+		<div class="container_12">
+			<div class="grid_6 alpha">
+					<%=f.label :address_line1%>
+					<%= f.text_field :address_line1, :class=>"text" %>
+			</div>
+
+			<div class="grid_6 omega">  
+					<%=f.label :address_line2%>
+			      <%= f.text_field :address_line2, :class=>"text" %>
+			</div>
+
+			<div class="grid_6 alpha">
+				<p>
+			<%=f.label :city%>
+			      <%= f.text_field :city, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6 omega">
+				<p>	
+					<%=f.label :state%>
+					<%= f.text_field :state, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6 alpha">
+				<p>
+					<%=f.label :pin_code%>
+					<%= f.text_field :pin_code, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6 omega">
+				<p>	
+					<%=f.label :country_id%>
+					<%= select :student, :country_id, Country.all.map {|c| [c.name, c.id]}, :selected=> 191 %>
+				</p>
+			</div>
+			<div class="clearfix">&nbsp;</div>
+
+			<div class="grid_6 alpha">
+				<p>
+					<%=f.label :phone1%>
+					<%= f.text_field :phone1, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6 omega">
+				<p>	
+					<%=f.label :phone2%>
+					<%= f.text_field :phone2, :class=>"text" %>
+				</p>
+			</div>
+		</div>
+		<div class="clearfix">&nbsp;</div>
+	</div>
+	<div id="tabs-3">
+		<div class="container_12">
+			<div class="grid_6 suffix_6">
+				<p>
+					<%= f.label :image%>
+					<%= f.file_field :image, :class=>"text" %>
+				</p>
+			</div>
+		</div>
+		<div class="clearfix">&nbsp;</div>
+	</div>
+	<div id="tabs-4">
+		<div class="container_12">
+			
+		</div>
+		<div class="clearfix">&nbsp;</div>
+	</div>
+</div>

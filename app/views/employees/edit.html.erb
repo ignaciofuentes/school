@@ -1,0 +1,42 @@
+<div class="container_12">
+	<div class="grid_1">
+		<img src="/images/HR/show_hr.png" alt="" />
+	</div>
+	<div class="grid_9">
+		<h1>Employee Admission</h1>
+	</div>
+	<div class="grid_2">
+		<%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+	</div>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<div class="container_12">
+
+
+	<% unless flash[:notice].nil? %><p class="flash-msg"> <%= flash[:notice] %> </p><% end %>
+	<% unless @last_admitted_employee.nil? %>
+	<p class="flash-msg"><%="Employee number of last employee is #{@last_admitted_employee.employee_number}"%></p>
+	<% end %>
+</div>
+
+<%= form_for(@employee, :html=> {:multipart=>true}) do |a| %>
+
+<%= render 'shared/error_messages', :target => @employee %>
+<%= render "#{@employee.current_step}_step",  :a => a%>
+
+<div class="clearfix">&nbsp;</div>
+<hr>
+<div class="clearfix">&nbsp;</div>
+<div class ="container_12">
+	<div class="grid_2 push_1">
+		<%= a.submit "► Back", :class=>"submit", :name=>"back_button" %>
+	</div>
+	<div class="grid_3 push_6">
+		<%= a.submit "► Continue", :class=>"submit" %>
+	</div>
+</div>
+
+<% end %>
+

@@ -1,0 +1,11 @@
+
+	<h2><%= @course.full_name unless @course.nil? %></h2>
+
+	<%= form_for [@course, Subject.new], :html=> {:remote=> true, :id=> "modal-form"} do |f| %>
+
+	<div id="form-errors">
+	</div>
+
+	<%= render 'subject_fields', :f => f %>
+
+	<% end %>

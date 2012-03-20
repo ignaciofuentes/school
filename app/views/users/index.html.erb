@@ -1,0 +1,53 @@
+<%= javascript "loader"%>
+<%= content_for :breadcrumb do%>
+Users
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag "menu_icons/manage_users.png" %>
+	</div>
+	<div class="grid_9">
+		<h1>Manage Users</h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>	
+</div>
+<div class="clearfix">&nbsp;</div>
+
+<div class="container_12">
+	<div class="grid_4" id="menu_small">
+		<h2><%= t"general.options" %></h2>
+		<ul>
+			<li><%= link_to "Add new",new_user_path%></li>
+		</ul>
+	</div>
+
+	<div class="grid_8">
+		<h2><%= t"general.search" %></h2>
+		<%= form_for @search, :method=>:get, :remote=>true do |f|%>
+
+		<%= image_tag("ajax-loader-blue.gif",
+		:align => "absmiddle",
+		:border => 0,
+		:id => "loader",
+		:class =>"hidden" ) %> 
+
+		<%= f.label :email_contains, "Email" %>
+		<%= f.text_field :email_contains, :class =>"text small" %>
+		<%= f.label :authenticatable_student_type_first_name_or_authenticatable_student_type_last_name_or_authenticatable_employee_type_first_name_or_authenticatable_employee_type_last_name_or_authenticatable_guardian_type_first_name_or_authenticatable_guardian_type_last_name_contains, "Name" %>
+		<%= f.text_field :authenticatable_student_type_first_name_or_authenticatable_student_type_last_name_or_authenticatable_employee_type_first_name_or_authenticatable_employee_type_last_name_or_authenticatable_guardian_type_first_name_or_authenticatable_guardian_type_last_name_contains, :class =>"text small" %>
+<div class="clearfix">&nbsp;</div>
+<div class="clearfix">&nbsp;</div>
+		<div class="grid_4 push_6">
+			<%= f.submit t("general.search"), :class=>"submit" %>		
+		</div>
+		<%end%>
+	</div>
+</div>
+<div class="clearfix">&nbsp;</div>
+
+<div class="container_12">
+	<h2><%= t"users.search_results" %></h2>
+	<div id="information">
+	</div>
+</div>

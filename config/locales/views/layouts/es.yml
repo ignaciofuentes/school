@@ -1,0 +1,14 @@
+es:
+    header:
+        dashboard: "Tablero"
+        calendar: "Calendario"
+        students: "Estudiantes"
+        attendance: "Asistencia"
+        settings: "Configuración"
+        news: "Noticias"
+        timetable: "Horario"
+        more: "Más"
+        logged_in_as: ""
+        messages: "Mensajes"
+        log_out: "Cerrar Sesión"
+        signed_in_as: "Ingresado como"

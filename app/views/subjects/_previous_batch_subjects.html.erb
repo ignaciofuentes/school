@@ -1,0 +1,18 @@
+<h4 style="text-align: center;">Previous Batch : <%= @batch.name %></h4>
+<% unless @subjects.empty? %>
+  <ul id="previous-category-list" class="category-list">
+    <div class="linker2">
+<%= link_to 'Select all', nil, :remote=>true %>
+</div>
+    <h4 style="width:300px;">Normal subjects</h4>
+  <% @subjects.each do |sub| %>
+    <li id="prev-subject-name-<%=sub.id%>">
+     <div class="category-name"> <%= sub.name %> </div>
+    <div class="category-sel"><%= link_to "Select", {:controller=> "subjects", :action=> "assign_previous_batch_subject", :batch_id=> @batch.id, :id=> sub.id}, :remote=>true %></div>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+        <hr style="color:#b40000">
+<h4 style="text-align: center;">Current Batch : <%= @batch.name %></h4>

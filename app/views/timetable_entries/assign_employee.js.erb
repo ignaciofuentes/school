@@ -1,0 +1,2 @@
+$("#modal-box").html("<%= escape_javascript(render "assign_employee", :timetable_entry => @timetable_entry, :batch=>@batch) %>");
+$("#modal-box").dialog("open");

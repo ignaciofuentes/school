@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  evaluation_structure_id: 1
+  name: MyString
+  value: 1
+
+two:
+  evaluation_structure_id: 1
+  name: MyString
+  value: 1

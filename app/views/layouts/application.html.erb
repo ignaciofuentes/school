@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Tu Colegio Online</title>
+
+	<!-- MASTER STYLESHEET-->
+
+	<%= stylesheet_link_tag 'css/styles_blue' %>	
+	<%= stylesheet_link_tag 'css/custom-theme/jquery-ui-blue' %>
+	<%= stylesheet_link_tag 'css/custom' %>
+	
+	
+
+	<!-- LOAD CUSTOM JQUERY SCRIPTS-->
+	<%= javascript_include_tag "jquery.js" %>
+	<%= javascript_include_tag "layout.js" %>
+	<%= javascript_include_tag "rails.js" %>
+	<%= javascript_include_tag "js/jquery-ui-1.8.12.custom.min" %>
+	<%= javascript_include_tag "jquery.ui.datepicker-es"%>
+	<%= javascript_include_tag "highcharts"%>
+
+
+	<!-- LOAD TIPSY TOOLTIPS-->
+	<%= javascript_include_tag "jquery.tipsy"%>
+	<!-- LOAD Scripts-->
+	<%= javascript_include_tag "scripts" %>
+	<!-- Modernizer -->
+	<%= javascript_include_tag "modernizr-1.7.min"%>
+
+
+	<%= csrf_meta_tag %>
+	<%= yield :head %>
+	
+	<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$.datepicker.setDefaults($.datepicker.regional['<%=current_user.language.short unless current_user.language.short == "en"%>']);
+		
+		Highcharts.setOptions({
+			lang: {
+				months: <%= t ("general.months")%>,
+				weekdays: <%= t ("general.days")%>
+			}
+		});
+	})
+	</script>
+
+</head>
+
+<body>
+	
+	<div id="sticky_wrapper">
+		
+	<%=render "layouts/header"%>
+	<!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]--> 
+<!-- Start Sticky wrapper-->
+<!-- EVERYTING BELOW IS THE MAIN CONTENT -->
+
+<div id="main_content_wrap" class="container_12">
+
+
+
+<%= yield %>
+
+
+</div>
+<div class="clearfix">&nbsp;</div>        
+
+</div>
+</div>
+<!-- End Sticky wrapper-->
+<div id="footer">	
+	<!-- START FOOTER -->
+	<div class="container_12">
+		<%=image_tag("manzanita_footer.png")%>
+		<p>&copy; Copyright 2011 Tu Colegio online  | Powered by <a href="#">Hekima Solutions</a> | <a href="#">Top</a></p>
+		</div>
+	</div>
+<!-- END FOOTER -->       
+<!-- end content wrap -->
+
+
+</body>
+</html>

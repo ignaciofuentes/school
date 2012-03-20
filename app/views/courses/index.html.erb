@@ -1,0 +1,56 @@
+<%= content_for :breadcrumb do%>
+
+<%= t"courses.courses_title"%>
+
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag("menu_icons/courses.png") %>
+	</div>
+	<div class="grid_9">
+		<h1><%= t"courses.courses_title"%></h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<div class="container_12">
+
+	<% unless flash[:notice].nil? %>
+	<%= render "shared/highlighted_messages", :msg=> flash[:notice]%>
+	<% end %>
+
+
+	<% unless flash[:warn_notice].nil? %>
+	<%= render "shared/highlighted_messages", :msg => flash[:warn_notice] %> 
+	<% end %>
+
+	<div class="grid_3" id="menu_small">
+		<h2><%= t"general.options"%></h2>
+		<ul>
+			<li>
+				<%= link_to t("general.new"), new_course_path %>
+			</li>
+		</ul>
+	</div>
+
+	<div class="grid_9">
+		<h2 class="center"><%= t"courses.courses"%></h2>
+
+		<table class="medium">
+			<thead>
+			</thead>
+			<tbody>
+				<% @courses.each do |course| %>
+				<tr>
+					<td><%= link_to course.name, course %></td>
+					<td><%= link_to t("general.edit"), edit_course_path(course) if permitted_to? :edit, :courses %></td>
+					<td><%= link_to(t("general.delete"), course, :method => :delete, :confirm => 'Are you sure?') if permitted_to? :destroy, :courses %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

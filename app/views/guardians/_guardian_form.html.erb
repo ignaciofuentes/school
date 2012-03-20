@@ -1,0 +1,133 @@
+<%= form_for [@student,@relationship], :html=> {:multipart=>true} do |f| %>
+	
+	<%=f.fields_for :guardian do |g| %>
+	
+
+
+		<div class="clearfix">&nbsp;</div>
+	<div class="container_12">
+
+		<h2><%= t"guardian.personal_details" %></h2>
+		
+		<div class="grid_6">
+			<p>
+				<%= g.label :unique_id, "Cedula"%>
+				<%= g.text_field :unique_id, :class=>"text" %>
+			</p>
+			<p>
+				<%= g.label :first_name%>
+				<%= g.text_field :first_name, :class=>"text" %>
+			</p>
+			<p>
+				<%= g.label :last_name%>
+				<%= g.text_field :last_name, :class=>"text" %>
+			</p>
+			<p>
+				<%= g.label :dob%>
+				<%= g.text_field :dob, :class =>"date_picker text" %>
+			</p>
+			<p>	
+				<%= g.label :education%>
+				<%= g.text_field :education, :class=>"text" %>
+			</p>
+		</div>
+
+		<div class="grid_6">
+			<p>
+				<%= g.label :occupation%>
+				<%= g.text_field :occupation, :class=>"text" %>
+			</p>
+
+			<p>
+				<%= g.label :income%>
+				<%= g.text_field :income, :class=>"text" %>
+			</p>
+
+			<p>
+				<%= g.label :email%>
+				<%= g.text_field :email, :class=>"text" %>
+			</p>
+
+			<p>
+				<%= g.label :relationship_type_id%>
+				<br />
+				<%=f.collection_select :relationship_type_id, RelationshipType.all, :id, :name, {:class=>"select"}%>
+			</p>
+				<p>
+					<%=g.label :gender%>
+					<%= g.radio_button "gender", "m", :checked => true %>
+					<label>Male</label>
+					<%= g.radio_button "gender", "f" %>
+					<label>Female</label>
+				</p>
+		</div>
+
+
+
+		<div class="clearfix">&nbsp;</div>
+
+		<h2><%= t"guardian.contact_details" %></h2>
+		<div class="grid_6">
+			<p>
+				<%= g.label :office_address_line1%>
+				<%= g.text_field :office_address_line1, :class=>"text" %>
+			</p>
+
+			<p>
+				<%= g.label :office_address_line2%>
+				<%= g.text_field :office_address_line2, :class=>"text" %>
+			</p>
+
+			<p>
+				<%= g.label :city%>
+				<%= g.text_field :city, :class=>"text" %>
+			</p>
+
+			<p>
+				<%= g.label :state%>
+				<%= g.text_field :state, :class=>"text" %>
+			</p>
+		</div>
+
+		<div class="grid_6">
+			<p>
+				<%= g.label :country_id%> 
+				<br />
+				<%= g.collection_select(:country_id, Country.all, :id, :name, {:selected=> 191}, {:class=>"select"}) %>
+			</p>
+
+			<p>
+				<%= g.label :office_phone1%>
+				<%= g.text_field :office_phone1, :class=>"text" %>
+			</p>
+
+			<p>
+				<%= g.label :office_phone2%>
+				<%= g.text_field :office_phone2, :class=>"text" %>
+			</p>
+
+			<p>
+				<%= g.label :mobile_phone%>
+				<%= g.text_field :mobile_phone, :class=>"text" %>
+			</p>
+			<p>
+				<%= g.label :image%>
+				<%= g.file_field :image, :class=>"text" %>
+			</p>
+		</div>
+
+		<% end %>
+
+	</div>
+
+
+	
+	<div class="clearfix">&nbsp;</div>
+	
+	
+	<div class="clearfix">&nbsp;</div>
+	<div class="grid_4">
+	<%= f.submit :value => t("forms.save"), :class => "submit" %>
+
+	<% end %>
+		</div>

@@ -1,0 +1,7 @@
+<%if !@period.valid?%>
+	$("#form-errors-edit").html('<%= escape_javascript(render 'shared/error_messages', :target => @period) %>');
+	$("#modal-box-edit").dialog("open");
+<% else %>
+		$("#period-<%= @period.id%>").replaceWith('<%= escape_javascript(render @period) %>');		
+		$("#new_period")[0].reset();
+<% end %>

@@ -1,0 +1,76 @@
+<%= content_for :breadcrumb do%>
+<%= link_to 'Timetable', :controller=>"timetable" %> &raquo; <%= link_to 'Schedules', schedules_path %> &raquo; <%=@schedule.name %>
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag "menu_icons/timetable.png" %>
+	</div>
+	<div class="grid_9">
+		<h1>Schedules</h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<div class="container_12">
+	<% unless flash[:notice].nil? %>
+	<p  class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+	<div id="msg"></div>
+	<div id="errors"></div>
+
+</div>
+
+<div class="grid_3" id="menu_small">
+	<h2>Options:</h2>
+	<ul>
+		<li><%= link_to 'Add Class Timing', nil, :class => "shower" %></li>
+	</ul>
+</div>
+
+<div class="grid_9">
+	<h2>Class Timings</h2>
+
+	<table id="class-timings-list" class="medium">
+		<thead>
+			<tr>							
+				<th>Name</th>
+				<th>Start time</th>
+				<th>End time</th>
+				<th>Operations</th>						
+			</tr>
+		</thead>
+		<tbody id="class-timings-list-body">
+		<%= render 'class_timings/class_timings_table', :c => @class_timings %>
+		</tbody>
+	</table>
+
+</div>
+</div>
+
+<div id="modal-box">	
+<%= render "class_timings/new" %>
+</div>
+
+
+<div id="modal-box-edit">	
+
+</div>
+
+
+
+
+<% content_for :head do%>
+<script type="text/javascript">
+$(function() {
+	$("#modal-box").modalBox("New Class Timing", "►Save Class Timing");
+	$("#modal-box-edit").modalBox("Edit Class Timing", "►Save Class Timing");
+	$(".shower").click(function (){
+		$("#modal-box").dialog("open");
+		return false;
+	});
+});
+</script>
+<%end%>

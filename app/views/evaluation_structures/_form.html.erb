@@ -1,0 +1,41 @@
+<%= nested_form_for(@evaluation_structure) do |f| %>
+<div class ="container_12">
+	<%= render 'shared/error_messages', :target => @evaluation_structure %>
+	<h2><%= form_name %></h2>
+	<div class="grid_6 alpha">
+		<p>
+			<%= f.label :name %><br />
+			<%= f.text_field :name, :class=>"text" %>
+		</p>
+		<p>
+			<%=f.label :numeric, "Type"%>
+			<%= f.radio_button  :numeric, 1,:checked=>@evaluation_structure.numeric? %>
+			<%= f.label :numeric, "Numeric", :value => 1%>			
+			<%= f.radio_button  :numeric, 0, :checked=>!@evaluation_structure.numeric? %>
+			<%= f.label :numeric, "Cualitative", :value => 0 %>
+		</p>
+	</div>
+	<div class="grid_6 omega" id="numeric">
+		<p>
+			<%= f.label :min %>
+			<%= f.text_field :min, :class=>"text" %>
+		</p>
+		<p>
+			<%= f.label :max %>
+			<%= f.text_field :max, :class=>"text" %>
+		</p>
+	</div>
+	<div class="grid_6 omega" id="cualitative">
+		<%= f.fields_for :cualitative_values do |builder|%>
+		<%= render "cualitative_value_fields", :f=> builder %>
+		<%end%>
+		<%= f.link_to_add "Add Cualitative Value", :cualitative_values%>
+	</div>
+</div>
+<div class="clearfix">&nbsp;</div>
+<div class ="container_12">
+	<hr />
+	<%= f.submit :class=>"submit" %>
+
+</div>
+<% end %>

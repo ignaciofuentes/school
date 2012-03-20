@@ -1,0 +1,59 @@
+<%= content_for :breadcrumb do%>
+ <%= link_to @evaluation.batch_subject.batch.name, @batch %> &raquo;
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag "menu_icons/examinations.png" %>
+	</div>
+	<div class="grid_9">
+		<h1><%= @evaluation.name %></h1>
+		<h3><%= @evaluation.batch_subject.subject.name %> <%= @evaluation.batch_subject.batch.name %></h3>
+		<h3><%= @evaluation.percentage %> %,<%= @evaluation.period.name %></h3>
+	</div>
+	<%= render :partial => 'shared/back_button' %>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<div class="container_12">
+	<% unless flash[:notice].nil? %>
+	<p class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+
+	<% unless flash[:warn_notice].nil? %>
+	<div id="errorExplanation" class="errorExplanation"><%= flash[:warn_notice] %> </div>
+	<% end %>
+
+	<div class="grid_3" id="menu_small">
+		<h2><%= t"general.options"%>:</h2>
+		<ul>
+			<%= render 'evaluations/evaluation_options' %>
+		</ul>
+	</div>
+
+	<div class="grid_9">
+		<h2>Grades</h2>
+		<%=form_for [@batch_subject, @evaluation], :url => save_grades_batch_subject_evaluation_path(@batch_subject, @evaluation) do |f|%>
+			<table class="medium">		
+				<thead>
+					<tr>
+						<th>name</th>
+						<th>Grade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%=f.fields_for :grades do |g|%>
+					<tr>
+					<td><%=g.label :value,g.object.student.full_name%> <%= g.hidden_field :student_id%></td>
+					<td><%=g.text_field :value%></td>
+					</tr>
+					<%end%>
+				</tbody>
+			</table>
+			<%=f.submit%>
+			<% end %>
+	</div>
+</div>
+

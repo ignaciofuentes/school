@@ -1,0 +1,13 @@
+<div class="grid_4 push_4">
+<%= form_for :student_category, :url => {:action => 'categories'} do |f| %>
+<div class="grid_6">
+	<p>
+	<label> Enter new Category : </label>
+	<%= f.text_field :name, :value => '', :class=>"text" %>
+		</p>
+	</div>
+</div>
+<%= submit_tag "", :value => "► Save", :class => "submit_button" %>
+
+<% end %>
+</div>

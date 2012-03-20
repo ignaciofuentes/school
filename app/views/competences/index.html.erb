@@ -1,0 +1,60 @@
+<%= content_for :breadcrumb do%>
+<%= link_to t("courses.courses_title"), courses_path %> &raquo; <%= link_to @batch.course.full_name, course_path(@batch.course) %> &raquo; <%= link_to @batch.full_name, batch_path(@batch)%> &raquo; <%= link_to @batch_subject.subject.name, batch_batch_subject_path(@batch, @batch_subject)%>
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag "menu_icons/courses.png" %>
+	</div>
+	<div class="grid_9">
+		<h1><%= @batch_subject.subject.name %></h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<div class="container_12">
+	<% unless flash[:notice].nil? %>
+	<p class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+
+	<% unless flash[:warn_notice].nil? %>
+	<div id="errorExplanation" class="errorExplanation"><%= flash[:warn_notice] %> </div>
+	<% end %>
+
+	<div class="grid_3" id="menu_small">
+		<h2><%= t"general.options"%>:</h2>
+		<ul>
+			<li><%= link_to 'New Competence', new_batch_subject_competence_path(@batch_subject) %></li>
+		</ul>
+	</div>
+
+	<div class="grid_9">
+		<table class="medium">
+			<h2>Competences</h2>
+			<thead>
+				<tr>
+					<th>Description</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @competences.each do |competence| %>
+				  <tr>
+				    <td><%= competence.description %></td>
+				    <td><%= link_to 'Show', competence %></td>
+				    <td><%= link_to 'Edit', edit_batch_subject_competence_path(@batch_subject, competence) %></td>
+				    <td><%= link_to 'Destroy',[@batch_subject, competence], :confirm => 'Are you sure?', :method => :delete %></td>
+				  </tr>
+				<% end %>
+			</tbody>
+		</table>
+
+
+	</div>
+</div>
+

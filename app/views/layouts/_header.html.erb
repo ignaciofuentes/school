@@ -1,0 +1,80 @@
+<div id="header" class="png_bg">
+
+    <div id="head_wrap" class="container_12">
+    
+        <!-- start of logo - you could replace this with an image of your logo -->
+        
+		<div class="grid_1">
+			<%= link_to image_tag("manzanita_white_header.png"), root_path %>
+		</div>
+		<div id="logo" class="grid_5">
+           
+			<h1>Tu Colegio<span>nline</span></h1>
+        </div>
+        <!-- end logo -->
+        
+        <!-- start control panel -->
+    	<div id="controlpanel" class="grid_6">
+        <% this_user = User.find(session[:user_id]) if session[:user_id] %>
+		
+            <ul>
+            
+    			<li>
+					<p>
+						<%= t("header.signed_in_as")%> 
+						
+					</p>
+				</li>
+                <li>
+					<%= link_to this_user.username, :controller=> :users, :action=> :show, :id=> this_user.id %>
+				</li>
+                <li>
+					<%= link_to t("header.log_out"), :controller => 'users', :action => 'logout' %>
+				</li>
+				
+                
+            </ul>
+            
+        </div>
+        <!-- end control panel -->
+    
+        <!-- start navigation -->
+      	<div id="navigation" class=" grid_12">
+           
+            <ul>          
+                <li><%=link_to("Dashboard", root_path, :class=>is_active_controller("home")) %></li>
+                <li><a href="#" <%=is_active_controller("student")%>>Student</a></li>
+                <li><a href="#" <%=is_active_controller("news")%>>News</a></li>
+                <li><a href="#" <%=is_active_controller("timetable")%>>Timetable</a></li>
+                <li><a href="#" <%=is_active_controller("configuration")%>>Settings</a></li>   
+            </ul>
+          
+        </div>
+        <!-- end navigation -->
+     
+    </div><!-- end headwarp  -->
+</div><!-- end header -->
+
+
+<!-- staqrt subnav -->
+<div id="sub_nav">
+
+<div id="subnav_wrap" class="container_12">
+	
+    <!-- start sub nav list -->
+	<div id="subnav" class=" grid_12">
+    
+        <ul>
+        
+           <%= yield :breadcrumb %>
+            
+        </ul>
+    
+    </div>
+    <!-- end subnavigation list -->	
+
+</div>
+
+
+</div>
+<!-- end sub_nav -->

@@ -1,0 +1,7 @@
+<tr id="period-<%= period.id %>" class="<%= cycle('odd','even')%>">
+	<td><%= period.name %></td>
+	<td>
+		<%= link_to 'Edit', edit_evaluation_structure_period_path(@evaluation_structure, period), :remote=> true %> |
+		<%= link_to('Delete', [@evaluation_structure, period], :method => :delete, :confirm => 'Are you sure?') %>
+	</td>
+</tr>

@@ -1,0 +1,13 @@
+<tr id="class-timing-<%= class_timing.id %>" class="<%= cycle('odd','even')   %>">
+      <td class="col-1"><%= class_timing.name %></td>
+      <td class="col-3"><%= class_timing.start_time.strftime("%I:%M %p") unless class_timing.start_time.nil? %></td>
+      <td class="col-3"><%= class_timing.end_time.strftime("%I:%M %p") unless class_timing.end_time.nil? %></td>
+      <td class="col-3"><small>
+	<%= link_to 'Edit', edit_schedule_class_timing_path(@schedule, class_timing), :remote=> true %>|
+    <% @tt = PeriodEntry.find_all_by_class_timing_id(class_timing.id ) %>
+  <% if @tt.empty? %>
+ <%= link_to('Delete', [@schedule, class_timing], :method => :delete, :confirm => 'Are you sure?') %></div>
+              <% else %>
+          <s>Delete</s>
+        <% end %></small></td>
+    </tr>

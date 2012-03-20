@@ -1,0 +1,8 @@
+<%= link_to "<span class=\"ui-icon ui-icon-closethick\"></span>".html_safe, [@batch, e], :method => :delete, :confirm => 'Are you sure?' %>
+			<%=  e.batch_subject.subject.name %>
+			<br />
+		<% if e.employee != nil %>
+			<p><%= e.employee.full_name %></p>
+			<% else %>
+			<p><%= link_to "Asignar profesor", assign_employee_batch_timetable_entry_path(@batch, e), :remote=> true %></p>
+			<% end %>

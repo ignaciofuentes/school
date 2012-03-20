@@ -1,0 +1,15 @@
+en:
+    header:
+        dashboard: "Dashboard"
+        calendar: "Calendar"
+        students: "Students"
+        attendance: "Attendance"
+        settings: "Settings"
+        news: "News"
+        timetable: "Timetable"
+        more: "More"
+        logged_in_as: "Logged in as:"
+        messages: "Messages"
+        log_out: "Log out"
+        signed_in_as: "Signed in as"
+        

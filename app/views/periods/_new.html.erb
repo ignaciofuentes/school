@@ -1,0 +1,10 @@
+<h2>Add new period for <%=@evaluation_structure.name%>
+</h2>
+  <%= form_for [@evaluation_structure, Period.new], :remote=>true do |f| %>
+
+  <div id="form-errors"></div>
+
+    <%= render 'periods/period_fields', :f => f %>
+
+  <% end %>
+

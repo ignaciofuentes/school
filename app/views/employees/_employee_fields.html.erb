@@ -1,0 +1,376 @@
+<div class="container_12">
+
+<% unless flash[:notice].nil? %>
+<p class="flash-msg"> <%= flash[:notice] %> </p>
+<% end %>
+
+<h5><%= t"forms.fields_marked_with"%> <strong>*</strong> <%= t"forms.must_be_filled"%>.</h5>
+<div class="clearfix">&nbsp;</div>
+
+<h2>Admision</h2>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+<div id="tabs">
+
+	<ul>
+		<li><a href="#tabs-1"><%= t"students.personal_details"%></a></li>
+		<li><a href="#tabs-2"><%= t"students.contact_details" %></a></li>
+		<li><a href="#tabs-3">Job</a></li>
+		<li><a href="#tabs-4">Bank Details</a></li>
+		<li><a href="#tabs-5"><%= t"students.additional_details" %></a></li>
+		<li><a href="#tabs-6">Contact Details</a></li>
+		<li><a href="#tabs-7"><%= t"forms.upload"%></a></li>
+	</ul>
+	<div id="tabs-1">
+		<div class="container_12">
+
+			<div class="grid_6">
+				<label for="employee_id">Employee no. <span class="necessary-field">*</span> </label>
+				<%= f.text_field :employee_number, :class=>"text" %>
+			</div>
+			<div class="grid_6">
+				<label for="employee_joining_date">Joining date. </label>
+				<%= f.text_field :joining_date, :class=> "date_picker text" %>
+			</div>
+
+			<h2>General Details</h2>
+
+			<div class="grid_6">
+				<label for="employee_name">First Name<span class="necessary-field">*</span> </label>
+				<%= f.text_field :first_name, :class=>"text" %>
+			</div>
+
+			<div class="grid_6">
+				<label for="employee_name">Middle Name<span class="necessary-field">*</span> </label>
+				<%= f.text_field :middle_name, :class=>"text" %>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_name">Last Name<span class="necessary-field">*</span> </label>
+					<%= f.text_field :last_name, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="dob">DOB <span class="necessary-field">*</span></label>
+					<%= f.text_field :date_of_birth, :class=> "date_picker text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label class="label_for_employee_gender" for="master_student_gender">Gender</label>
+					<div class="employee_gender_value">
+
+						<label class="label_for_gender" for="master_student_gender_true">Male</label>
+						<%= f.radio_button  "gender", "true", :checked => "checked" %>
+
+						<label class="label_for_gender" for="master_student_gender_false">Female</label>
+						<%= f.radio_button  "gender", "false" %>
+					</p>
+				</div>
+			</div>
+
+		</div> 
+	</div> 
+
+	<div class="clearfix">&nbsp;</div>
+	<div id="tabs-2">
+		<div class="container_12">
+			<h2>Personal Details</h2>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_father">Father name</label>
+					<%= f.text_field :father_name, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_mother">Mother name</label>
+					<%= f.text_field :mother_name, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_martial_status">Martial status</label>
+					<%= select :employee, :marital_status, ["Single", "Married","Divorced"] %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="children_count">No of children</label>
+					<%= f.text_field :children_count, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_spouse">Spouse name</label>
+					<%= f.text_field :husband_name, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_blood">Blood group</label>
+					<%= select :employee, :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"] %>
+				</p>      
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_nationality">Nationality</label>
+
+					<%= f.collection_select :nationality_id, Country.all, :id, :name, :selected => 191 %>
+				</p>
+			</div>
+
+		</div>
+		<div class="clearfix">&nbsp;</div>
+	</div>
+	<div id="tabs-3">
+		<div class="container_12">
+
+			<h2>Job Details</h2>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_department">Department <span class="necessary-field">*</span></label>
+					<%= f.collection_select :employee_department_id, EmployeeDepartment.all, :id, :name, :prompt => "Select" %>
+				</p>
+			</div>
+
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_category">Category <span class="necessary-field">*</span> </label>      
+					<%= f.collection_select :employee_category_id, EmployeeCategory.all, :id, :name, :prompt => "Select" %>	
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_position">Position <span class="necessary-field">*</span></label>
+					<%= f.collection_select :employee_position_id, EmployeePosition.all,:id, :name, {:prompt => 'Select' } %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_grade">Grade <span class="necessary-field">*</span></label>
+					<%= f.collection_select :employee_grade_id, EmployeeGrade.all, :id, :name, :prompt => "Select" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_job_title">Job Title</label>
+					<%= f.text_field :job_title, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_qualification">Qualification</label>
+					<%= f.text_field :qualification, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6-text-area">
+				<p>
+					<label for="employee_experience">Experience Info</label>
+					<%= f.text_area :experience_detail,:cols => 27, :rows => 5,:class => 'admission1-textarea' %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label for="employee_total-experience">Total Experience</label>
+					<%= select :employee, :experience_year, (0..20),{:prompt=>"Year"} %>
+					<%= select :employee, :experience_month, (0..11),{:prompt=>"Month"} %>
+				</p>
+			</div>
+			<div class="grid_6">
+				<p>
+					<label class="employee_status" for="employee_status">Status</label>
+					<label class="label_for_status" for="employee_status_true">Active</label>
+					<%= f.radio_button  "status", "true", :checked => "checked" %>
+					<label class="label_for_status" for="employee_status_false">Inactive</label>
+					<%= f.radio_button  "status", "false" %>
+				</p>
+			</div>
+
+		</div>
+		
+		<div class="clearfix">&nbsp;</div>
+	</div>
+	<div id="tabs-4">
+		<div class="container_12">
+			<h2>Bank Details</h2>
+
+		</div>
+	</div>
+	<div id="tabs-5">
+		<div class="container_12">
+			<h2>Additional Details</h2>
+
+		</div>
+	</div>
+	<div id="tabs-6">
+		<div class="container_12">
+			<h2>Home Address</h2>
+			<div class="grid_6">
+				<p>
+					<label>Line 1</label>
+					<%= f.text_field :home_address_line1, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>Line 2</label>
+					<%= f.text_field :home_address_line2, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>City</label>
+					<%= f.text_field :home_city, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>State</label>
+					<%= f.text_field :home_state, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>Country</label>
+					<%= f.collection_select :home_country_id, Country.all, :id, :name, :selected => 191 %>
+
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>PIN</label>
+					<%= f.text_field :home_pin_code, :class=>"text" %>
+				</p>
+			</div>
+			<br/>
+
+			<h2>Office Address</h2>
+
+			<div class="grid_6">
+				<p>
+					<label>Line 1</label>
+					<%= f.text_field :office_address_line1, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>Line 2</label>
+					<%= f.text_field :office_address_line2, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>City</label>
+					<%= f.text_field :office_city, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>State</label>
+					<%= f.text_field :office_state, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>Country</label>
+					<%= f.collection_select :office_country_id, Country.all, :id, :name, :selected => 191 %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>PIN</label>
+					<%= f.text_field :office_pin_code, :class=>"text" %>
+				</p>
+			</div>
+			<br/>
+
+			<h2>Contact Details</h2>
+
+			<div class="grid_6">
+				<p>
+					<label>Office phone1</label>
+					<%= f.text_field :office_phone1, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>Office phone2</label>
+					<%= f.text_field :office_phone2, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>Mobile</label>
+					<%= f.text_field :mobile_phone, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>Home phone</label>
+					<%= f.text_field :home_phone, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>Email</label>
+					<%= f.text_field :email, :class=>"text" %>
+				</p>
+			</div>
+
+			<div class="grid_6">
+				<p>
+					<label>FAX</label>
+					<%= f.text_field :fax, :class=>"text" %>
+				</p>
+			</div>
+		</div>
+		<div class="clearfix">&nbsp;</div>
+		<div id="tabs-7">
+			<div class="container_12">
+				<div class="grid_6">
+					<p>
+						<label for="master_student_image_file">Upload photo</label>
+						<%= f.file_field :image_file, :class=>"text" %>
+					</p>
+				</div>
+			</div>
+			<div class="clearfix">&nbsp;</div>
+		</div>
+	</div>
+
+</div>

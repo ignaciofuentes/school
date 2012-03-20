@@ -1,0 +1,231 @@
+
+<% content_for :head do %>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+	$("#tabs").tabs();
+});
+</script>
+
+<script type="text/javascript" charset="utf-8">
+
+$(function() {
+	
+	var chart = new Highcharts.Chart({
+		chart:{
+			renderTo: "chart",
+			type: "line"
+		},
+		title:{
+			text: "grades"
+		},
+		xAxis: {
+			type: "datetime",
+			labels: {
+			            enabled: true
+			        }
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: 'Grade'
+			}
+		},
+		credits:{
+			text: "TuColegiOnline",
+			href: "http://www.tucolegionline.com",
+			style: {
+				cursor: 'pointer',
+				color: '#909090',
+				fontSize: '10px'
+			}
+		},
+		legend:{
+			enabled: true
+		},
+		tooltip: {
+		         formatter: function() {
+		                   return '<b>'+ this.point.name +'</b> ('+Highcharts.dateFormat("%B %e, %Y",this.x)+') <br/>'+
+		                this.y ;
+		         }
+		      },
+		series: [
+			<% @batch.batch_subjects.each do |bs| %>
+				{
+		         name: "<%= bs.subject.name %>",
+		         data:[ 
+					<% (Grade.for_student(@student).for_batch_subject(bs).where(:evaluations => {:date => (@start_date)..(@end_date)}).order(:date)).each do |grade|%> 
+					{
+					name: "<%=grade.evaluation.name %>", 
+					y: <%=grade.value.to_f%>,
+					x: <%=grade.evaluation.date.to_datetime.to_i * 1000%>
+				
+		      },
+				<%end%>
+				]},
+			<% end %>
+		]
+
+	});
+	$('#button').button();
+	$('#button').click(function() {
+	  var series = chart.series[0],
+	      newType = series.type == 'line' ? 'column' : 'line';
+	    changeType(series, newType);
+	})
+	function changeType(series, newType) {
+	    var dataArray = [],
+	        points = series.data;
+
+	    series.chart.addSeries({
+	        type: newType,
+	        name: series.name,
+	        color: series.color,
+	        data: series.options.data
+	    }, false);
+
+	    series.remove();
+	}
+});
+
+</script>
+
+<%end%>
+
+<%= content_for :breadcrumb do%>
+
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag "menu_icons/courses.png" %>
+	</div>
+	<div class="grid_9">
+		<h1><%= @student.full_name %></h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<div class="container_12">
+	<% unless flash[:notice].nil? %>
+	<p class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+
+	<% unless flash[:warn_notice].nil? %>
+	<div id="errorExplanation" class="errorExplanation"><%= flash[:warn_notice] %> </div>
+	<% end %>
+
+	<div class="grid_3" id="menu_small">
+		<h2><%= t"general.options"%>:</h2>
+		<ul>
+			
+		</ul>
+	</div>
+
+
+</div>
+<div class="grid_9">
+	<div id="tabs">
+
+		<ul>
+			<li><a href="#tabs-1">Status</a></li>
+			<li><a href="#tabs-2">Evaluaciones</a></li>
+			<li><a href="#tabs-3"><%= t("batches.subjects")%></a></li>
+			<li><a href="#tabs-4"><%= t"students.students"%></a></li>
+		</ul>
+		<div id="tabs-1">
+
+			<h2>Graph</h2>
+			<div id="chart" style="height:500px">
+
+			</div>
+		</div>
+		<div id="tabs-2">
+			<h2>Evaluaciones</h2>
+			<%= form_tag('', :method => :get)%>
+			<%= text_field_tag :start_date, nil, :class=> "text date_picker" %>
+			<%= text_field_tag :end_date, nil, :class=> "text date_picker" %>
+			<%= submit_tag%>
+			</form>
+			<table class="regular">	
+				<thead>
+					<tr>
+						<th><%= t("batches.subject")%></th>
+						<th><%= t"general.name"%></th>
+						<th>Lapso</th>					
+						<th>Fecha</th>
+						<th>Grade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @evaluations.each do |evaluation| %>
+					<tr class="tr-<%= cycle('odd', 'even')%>">
+						<td><%=link_to evaluation.batch_subject.subject.name, batch_batch_subject_path(@batch, evaluation.batch_subject) %></td>
+						<td><%= link_to evaluation.name, [evaluation.batch_subject, evaluation] %></td>
+						<td><%=evaluation.date%></td>
+						<td><%=evaluation.percentage%>%</td>					
+						<td>
+						<% g = evaluation.grades.for_student(@student).first%>
+						<% if g != nil%>
+						<%= g.value%>
+						<% else %>
+						NE
+						<% end %>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<div class="clearfix">&nbsp;</div>
+		</div>
+		<div id="tabs-3">
+			<h2><%= t("batches.subjects")%></h2>
+			<table class="regular">	
+				<thead>
+					<tr>
+						<th><%= t"general.name"%></th>
+						<th>Porcentaje Evaluado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @slno = 0 %>
+					<% @batch.batch_subjects.each do |batch_subject| %>
+					<tr class="tr-<%= cycle('odd', 'even')%>">
+						<td class="col-2"><%= link_to batch_subject.subject.name, batch_batch_subject_path(@batch, batch_subject) %></td>
+						<td> </td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<div class="clearfix">&nbsp;</div>
+		</div>
+			<div id="tabs-4">
+
+				<h2><%= t"students.students"%></h2>
+				<table class="regular">	
+					<thead>
+						<tr>
+							<th>Sl.no</th>
+							<th><%= t"general.name"%></th>
+							<th><%= t"students.unique_id"%></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @slno = 0 %>
+						<% @batch.students.each do |student| %>
+						<% @slno= @slno + 1 %>
+						<tr class="tr-<%= cycle('odd', 'even')%>">
+							<td class="col-1"><%=  @slno %></td>
+							<td class="col-2"><%= link_to student.full_name, student %></td>
+							<td class="col-3"><%= student.unique_id %> </td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+
+	</div>
+

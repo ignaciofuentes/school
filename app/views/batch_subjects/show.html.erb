@@ -1,0 +1,64 @@
+<%= content_for :breadcrumb do%>
+<%= link_to 'Settings', :controller=>"configuration" %> &raquo; <%= link_to t("courses.courses_title"), courses_path %> &raquo; <%= link_to @course.full_name, @course %> &raquo; <%= link_to @batch.full_name, @batch %> &raquo; Sub
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag "menu_icons/courses.png" %>
+	</div>
+	<div class="grid_9">
+		<h1><%= @batch_subject.subject.name %></h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<div class="container_12">
+	<% unless flash[:notice].nil? %>
+	<p class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+
+	<% unless flash[:warn_notice].nil? %>
+	<div id="errorExplanation" class="errorExplanation"><%= flash[:warn_notice] %> </div>
+	<% end %>
+
+	<div class="grid_3" id="menu_small">
+		<h2><%= t"general.options"%>:</h2>
+		<ul>
+			<li><%= link_to "Evaluations", batch_subject_evaluations_path(@batch_subject) %></li>
+			<li><%= link_to "View Grades", grades_batch_subject_evaluations_path(@batch_subject) %></li>
+			<li><%= link_to "Competencias e Indicadores", batch_subject_competences_path(@batch_subject) %></li>
+		</ul>
+	</div>
+
+	<div class="grid_9">
+		<h2><%= t"students.students"%></h2>
+		<table class="medium">	
+			<thead>
+				<tr>
+					<th>Sl.no</th>
+					<th><%= t"general.name"%></th>
+					<th><%= t"students.unique_id"%></th>
+					<th>Comp/Ind</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @slno = 0 %>
+				<% @batch_subject.batch.students.each do |student| %>
+				<% @slno= @slno + 1 %>
+				<tr class="tr-<%= cycle('odd', 'even')%>">
+					<td><%=  @slno %></td>
+					<td><%= link_to student.full_name, student %></td>
+					<td><%= student.unique_id %> </td>
+					<td><%= link_to "Evaluar", assign_cualitative_grades_batch_subject_student_path(@batch_subject, student) %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+
+	</div>
+</div>
+

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @period.name %>
+</p>
+
+<p>
+  <b>Evaluation structure:</b>
+  <%= @period.evaluation_structure_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_period_path(@period) %> |
+<%= link_to 'Back', periods_path %>

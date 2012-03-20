@@ -1,0 +1,110 @@
+
+<%=  @file_size %>
+<div class="container_12">
+	<div class="grid_1">
+		<img src="/images/show_settings.png" />
+	</div>
+	<div class="grid_9">
+		<h1>Configuration</h1>
+	</div>
+	<div class="grid_2">
+		<%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+	</div>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<div class="container_12">
+	<h2>General Settings</h2>
+
+	<% unless flash[:notice].nil? %>
+	<p class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+
+	<%= form_for(:configuration,:html=> {:multipart=>true}) do |c| %>
+
+	<div class="grid_6">
+		<p>
+			<label for="configuration_currency_type">School/College Name</label>
+			<%= text_field :configuration, :institution_name, :value => @config[:institution_name],:class=>"text" %>
+		</p>
+	</div>
+	<div class="grid_6">
+		<p>
+			<label for="configuration_currency_type">School/College Address</label>
+			<%= text_field :configuration, :institution_address, :value => @config[:institution_address],:class=>"text" %>
+		</p>
+	</div>
+	<div class="grid_6">
+		<p>
+			<label for="configuration_currency_type">School/College Phone</label>
+			<%= text_field :configuration, :institution_phone_no, :value => @config[:institution_phone_no],:class=>"text" %>
+		</p>
+	</div>
+	<div class="grid_6">
+		<p>
+			<label for="configuration_currency_type">Currency Type</label>
+			<%= text_field :configuration, :currency_type, :value => @config[:currency_type],:class=>"text" %>
+		</p>
+	</div>
+	<div class="grid_6">
+		<p>
+			<label for="configuration_student_attendance_type">Student Attendance Type</label>
+			<%= select :configuration, :student_attendance_type, Configuration::STUDENT_ATTENDANCE_TYPE_OPTIONS,
+			:selected => @config[:student_attendance_type] %>
+		</p>
+	</div>
+	<div class="grid_6">
+		<p>
+			<label for="configuration_currency_type">Upload Logo</label>
+			<%= file_field 'upload', 'datafile', :class=>"text" %>
+		</p>
+	</div>
+
+	<% if @config[:admission_number_auto_increment] == '1' %>
+	<div class="grid_6">
+		<p>
+			<%= check_box :configuration, :admission_number_auto_increment, :checked => true %> 
+			Enable Auto increment Student admission no.
+		</p>
+	</div>
+
+	<% else %>
+	<div class="grid_6">
+		<p>
+			<%= check_box :configuration, :admission_number_auto_increment, :checked => false %> 
+			Enable Auto increment Student admission no.
+		</p>
+	</div>
+	<% end %>
+
+	<% if Configuration.available_modules.include?('HR') %>
+	<% if @config[:employee_number_auto_increment] == '1' %>
+	<div class="grid_6">
+		<p>
+			<%= check_box :configuration, :employee_number_auto_increment, :checked => true %> 
+			Enable Auto increment Employee no.
+		</p>
+	</div>
+	<% else %>
+	<div class="grid_6">
+		<p>
+			<%= check_box :configuration, :employee_number_auto_increment, :checked => false %>
+			Enable Auto increment Employee no.
+		</p>
+	</div>
+	<% end %>
+	<% end %>
+<div class="clearfix">&nbsp;</div>
+<hr>
+
+	<div class="grid_4 push_5">
+		<%= submit_tag "► Update", :class=>"submit"%>
+		<% end %>
+	</div>
+</div>
+
+
+
+

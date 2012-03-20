@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  evaluation_structure_id: 1
+
+two:
+  name: MyString
+  evaluation_structure_id: 1

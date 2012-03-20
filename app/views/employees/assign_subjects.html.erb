@@ -1,0 +1,42 @@
+<%= content_for :breadcrumb do%>
+Employees &raquo; <%= link_to @employee.full_name, @employee%> &raquo; Employees Subject Association
+<% end %>
+<div class="container_12">
+	<div class="grid_1">
+		<img src="/images/HR/show_hr.png" alt="" />
+	</div>
+	<div class="grid_9">
+		<h1><%= @employee.full_name%></h1>
+	</div>
+	<div class="grid_2">
+		<%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+	</div>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<div class="container_12">
+<%= form_for @employee, :url=> save_subjects_employee_path(@employee) do |a|%>
+	<div class="grid_12">
+		<h2>Subjects</h2>
+		<div class="grid_3 alpha">
+		<%= a.submit t("forms.save"), :class=>"submit"%>
+		</div>
+		<div class="grid_9 omega">
+			
+		<% unless flash[:notice].nil? %>
+		<p class="flash-msg"> 
+			<%= flash[:notice] %>
+		</p> 
+		<% end %>
+	<%@subjects.each do |s|%>
+			<div class="grid_3 <%= cycle("alpha", "","omega")%>">
+			<%= check_box_tag :subject_ids, s.id, @employee.subjects.include?(s), :name=> "employee[subject_ids][]"%>
+			<%=s.full_name%>
+			</div>
+		<% end %>
+			
+		<%end%>
+	</div>
+</div>
+<div class="clearfix">&nbsp;</div>

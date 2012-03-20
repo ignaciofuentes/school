@@ -1,0 +1,63 @@
+es:
+    activerecord:
+        models:
+            batch: Promocion
+            schedule: Horario
+            student: Estudiante
+            guardian: Representante
+        attributes:
+            batch:
+                name: "Nombre"
+                section_name: "Nombre de la Sección"
+                start_date: "Fecha de Inicio"
+                end_date: "Fecha de Fin"
+                code: "Código"
+            subject:
+                name: "Nombre"
+            user:
+                 username: "Login de Usuario"
+                 password: "Contraseña"
+                 language_id: "Lenguaje"
+            student:
+                 admission_no: "No. De Cedula"
+                 admission_date: "Fecha de Admisión"
+                 first_name: "Primer Nombre"
+                 middle_name: "Segundo Nombre"
+                 last_name: "Apellido"
+                 date_of_birth: "Fecha de Nacimiento"
+                 gender: "Sexo"
+                 batch_id: "Curso y Promoción"
+                 blood_group: "Grupo Sanguineo"
+                 birth_place: "Lugar de Nacimiento"
+                 nationality_id: "Nacionalidad"
+                 student_category_id: "Categoría del estudiante"
+                 category: "Categoría"
+                 religion: "Religión"
+                 address_line1: "Dirección Linea 1"
+                 address_line2: "Dirección Linea 2"
+                 city: "Ciudad"
+                 state: "Estado"
+                 pin_code: "Código Postal"
+                 country_id: "País"
+                 phone1: "Teléfono 1"
+                 phone2: "Teléfono 2"
+                 email: "Email"
+            guardian:
+                first_name: "Primer Nombre"
+                middle_name: "Segundo Nombre"
+                last_name: "Apellido"
+                dob: "Fecha de Nacimiento"
+                education: "Nivel de Educación"
+                occupation: "Ocupación"
+                income: "Ingresos"
+                email: "Email"
+                relationship_type_id: "Tipo de Relación"
+                office_address_line1: "Direccción de oficina 1"
+                office_address_line2: "Direccción de oficina 1"
+                city: "Ciudad"
+                state: "Estado"
+                country_id: "País"
+                office_phone1: "Teléfono oficina 1"
+                office_phone2: "Teléfono oficina 2"
+                mobile_phone: "Teléfono movil"
+                

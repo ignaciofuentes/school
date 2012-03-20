@@ -1,0 +1,11 @@
+<%= stylesheet('student/edit_guardian')%>
+<div id="content-header">
+  <img src="/images/admission/admission_page_logo.jpg" />
+  <h1>Parent Information</h1>
+  <h3>Edit Parent/guardian details</h3>
+    <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<%=render "guardian_form" %>

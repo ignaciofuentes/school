@@ -1,0 +1,11 @@
+<tr>
+<td>
+<%= link_to guardian.full_name, guardian%>
+</td>
+<td>
+	<%=guardian.relationships.for_student(@student).relationship_type.name%>
+</td>
+<td>
+	<%=link_to "Edit", edit_student_relationship_path(@student, guardian.relationships.for_student(@student))%>
+</td>
+</tr>

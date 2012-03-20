@@ -1,0 +1,58 @@
+<%= content_for :breadcrumb do%>
+	<%= link_to  t("students.students"), students_path %> &raquo;<%= link_to  @student.full_name, @student%> &raquo; <%= t"guardian.guardians" %> 
+	<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag("menu_icons/parents.png") %>
+	</div>
+	<div class="grid_9">
+		<h1><%= t"guardian.guardians" %></h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<div class="container_12">
+	<% unless flash[:notice].nil? %>
+	<p  class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+	<div id="msg"></div>
+	<div id="errors"></div>
+
+
+	<div class="grid_3" id="menu_small">
+		<h2><%= t"general.options" %></h2>
+		<ul>
+			<li>
+				<%= link_to t("guardian.add_guardian"), add_relationship_student_relationships_path(@student)%>
+			</li>
+		</ul>
+	</div>
+
+	<div class="grid_9">
+		<h2><%= t"guardian.guardians" %></h2>
+		<table class="medium" id="normal_subjects">	
+			<thead>
+				<tr>
+					<th colspan="4">Sl.no</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%=render @guardians%>
+
+			</tbody>
+		</table>	
+	</div>
+</div>
+
+
+
+<% content_for :head do%>
+<script type="text/javascript">
+$(function() {
+	});
+});
+</script>
+<%end%>

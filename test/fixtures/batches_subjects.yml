@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  batch_id: 1
+  subject_id: 1
+  max_weekly_classes: 1
+  no_exams: false
+
+two:
+  batch_id: 1
+  subject_id: 1
+  max_weekly_classes: 1
+  no_exams: false

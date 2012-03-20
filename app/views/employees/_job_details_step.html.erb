@@ -1,0 +1,76 @@
+<div class="container_12">
+	
+	<h2>Job Details</h2>
+
+	<div class="grid_6">
+		<p>
+			<label for="employee_department">Department <span class="necessary-field">*</span></label>
+			<%= a.collection_select :employee_department_id, EmployeeDepartment.all, :id, :name, :prompt => "Select" %>
+		</p>
+	</div>
+
+
+	<div class="grid_6">
+		<p>
+			<label for="employee_category">Category <span class="necessary-field">*</span> </label>      
+			<%= a.collection_select :employee_category_id, EmployeeCategory.all, :id, :name, :prompt => "Select" %>	
+		</p>
+	</div>
+
+	<div class="grid_6">
+		<p>
+			<label for="employee_position">Position <span class="necessary-field">*</span></label>
+			<%= a.collection_select :employee_position_id, EmployeePosition.all,:id, :name, {:prompt => 'Select' } %>
+		</p>
+	</div>
+
+	<div class="grid_6">
+		<p>
+			<label for="employee_grade">Grade <span class="necessary-field">*</span></label>
+			<%= a.collection_select :employee_grade_id, EmployeeGrade.all, :id, :name, :prompt => "Select" %>
+		</p>
+	</div>
+
+	<div class="grid_6">
+		<p>
+			<label for="employee_job_title">Job Title</label>
+			<%= a.text_field :job_title, :class=>"text" %>
+		</p>
+	</div>
+
+	<div class="grid_6">
+		<p>
+			<label for="employee_qualification">Qualification</label>
+			<%= a.text_field :qualification, :class=>"text" %>
+		</p>
+	</div>
+
+	<div class="grid_6-text-area">
+		<p>
+			<label for="employee_experience">Experience Info</label>
+			<%= a.text_area :experience_detail,:cols => 27, :rows => 5,:class => 'admission1-textarea' %>
+		</p>
+	</div>
+
+	<div class="grid_6">
+		<p>
+			<label for="employee_total-experience">Total Experience</label>
+			<%= select :employee, :experience_year, (0..20),{:prompt=>"Year"} %>
+			<%= select :employee, :experience_month, (0..11),{:prompt=>"Month"} %>
+		</p>
+	</div>
+
+
+
+
+	<div class="grid_6">
+		<p>
+			<label class="employee_status" for="employee_status">Status</label>
+			<label class="label_for_status" for="employee_status_true">Active</label>
+			<%= a.radio_button  "status", "true", :checked => "checked" %>
+			<label class="label_for_status" for="employee_status_false">Inactive</label>
+			<%= a.radio_button  "status", "false" %>
+		</p>
+	</div>
+
+</div>

@@ -1,0 +1,83 @@
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag("menu_icons/human_resources.png") %>
+	</div>
+	<div class="grid_9">
+		<h1>HR Management</h1>
+		<h3>Human Resource</h3>
+	</div>
+	<%= render :partial => 'shared/back_button' %>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<% unless flash[:notice].nil? %>
+<p class="flash-msg"> <%= flash[:notice] %> </p>
+<% end %>
+
+
+<div class="container_12">
+	<div class="grid_12" id="icondock_small">
+	
+		<ul>
+			<li>
+				<%= link_to :controller=>"employee", :action=>"settings" do%>
+				<%= t"menu.human_resources.settings" %>
+				<span><%= t"menu.human_resources.hr_settings" %></span>
+			</li>
+			<%end%>
+				
+			<li>
+				<%= link_to new_employee_path do%>
+				<%= t"menu.human_resources.employee_admission" %>
+				<span><%= t"menu.human_resources.employee_admission_form" %></span>
+				<% end %>
+			</li>
+			
+			<li>
+				<%= link_to :controller=>"employee", :action=>"employee_attendance" do %>
+				<%= t"menu.human_resources.employee_attendance" %>
+				<span><%= t"menu.human_resources.manage_employee_attendance" %></span>
+			</li>
+			<%end%>
+		
+
+		
+			<li>
+				<%= link_to :controller=>"employee", :action=>"payslip" do%>
+				<%= t"menu.human_resources.create_payslip" %>
+				<span><%= t"menu.human_resources.create_montly_payslip" %></span>
+			</li>
+			<%end%>
+		
+
+		
+			<li>
+				<%= link_to employees_path do%>
+				<%= t"menu.human_resources.employee_search" %>
+				<span><%= t"menu.human_resources.search_employees" %></span>
+			</li>
+			<%end%>
+	
+			
+			<li>
+				<%= link_to :controller=>"employee", :action=>"department_payslip" do%>
+				<%= t"menu.human_resources.employee_payslip" %>
+				<span><%= t"menu.human_resources.search_employees" %></span>
+			</li>
+			<%end%>
+		
+			<% finance = Configuration.available_modules %>
+			<% unless finance.include?("Finance") %>
+			
+			<li>
+				<%= link_to :controller=>"employee", :action=>"payslip_approve" do%>
+				One click approve payslip
+				<span>Approve monthly payslip </span>
+			</li>
+			<%end%>
+		
+			<%end%>
+		</ul>
+	</div>
+</div>

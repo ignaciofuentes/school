@@ -1,0 +1,23 @@
+<%= form_for [@course, @batch] do |f| %>
+	<h2><%= form_name %></h2>	
+	<%= render "batch_fields", :f => f %>
+	
+	<div class="clearfix">&nbsp;</div>
+	
+	<h2>Subjects</h2>
+	<% for subject in @course.active_subjects %>
+	<div class="grid_4">
+		<p>
+			<%= check_box_tag :subject_ids, subject.id, @batch.subjects.include?(subject), :name => 'batch[subject_ids][]' %>
+			<%= label_tag :subject_ids, subject.name %>
+		</p>
+	</div>
+	<% end %>
+	
+	<div class="clearfix">&nbsp;</div>
+	<hr />
+	<div class="grid_4">
+	<%= f.submit :value => "► Save", :class => "submit" %>
+
+	<% end %>
+		</div>

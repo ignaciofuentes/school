@@ -1,0 +1,7 @@
+<%if !@subject.valid?%>
+	$("#form-errors-edit").html('<%= escape_javascript(render 'shared/error_messages', :target => @subject) %>');
+	$("#modal-box-edit").dialog("open");
+<% else %>
+		$("#subject-<%= @subject.id%>").replaceWith('<%= escape_javascript(render 'subject', :subject => @subject) %>');		
+		$("#modal-form")[0].reset();
+<% end %>

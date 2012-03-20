@@ -1,0 +1,69 @@
+en:
+    login:
+        username: "Username"
+
+    configuration: "Configuration"  
+
+    dashboard:
+        layout: "_layouts/dashboard_en"
+        main_heading: "Dashboard"
+        signed_in_as: "Signed in as"
+        titles:
+            admission: "Admision"
+            students: "Student Details"
+            users: "Manage Users"
+            news: "Manage News"
+            exams: "Examination"
+            timetable: "Timetable"
+            attendance: "Attendance"
+            settings: "Settings"
+            human_resources: "Human Resources"
+            finance: "Finance"
+            courses: "Courses"
+        buttons:
+            admission: "Enter a Students admision details into the school records."
+            students: "Search for an existing and former student records"
+            users: "Manage the Users of Tucolegionline."
+            news: "View or publish latest school news and announcements"
+            exams: "See examination details and results"
+            timetable: "Timetable management module"
+            attendance: "Manage the attendance for the students"
+            settings: "Configure the basic school settings"
+            human_resources: "Human Resource Department"
+            finance: "Manage Finance Module"
+            courses: "View all Courses"
+    
+    menu:
+        settings:
+            configuration: "Configuration"
+            manage_courses: "Manage Courses"
+            manage_courses_sub: "Add a new Course or Batch for this academic year" 
+            manage_student_categories: "Manage student categories"
+            manage_student_categories_sub: "Add student category" 
+            general_settings: "General settings"
+            general_settings_sub: "Set some general configurations related to institution,attendance, etc"
+            add_admission_details: "Add admission additional details"
+            add_admission_details_sub: "Set some additional details for admission"
+        
+        human_resources:
+            settings: "Settings"
+            hr_settings: "HR settings"
+            employee_admission: "Employee admission"
+            employee_admission_form: "Employee admissions form"
+            employee_search: "Employee search"
+            search_employees: "Search for employees"
+            employee_attendance: "Employee Attendance"
+            manage_employee_attendance: "Manage all employee attendance and leaves"
+            create_payslip: "Create Payslip"
+            create_montly_payslip: "Create employee monthly payslips"
+            employee_payslip: "Employee Payslip"
+        
+        timetable: 
+            create_edit: "Create/Edit Timetable"
+            select_edit_timetable: "Select a class and edit the timetable for that class"
+            set_schedules: "Set Schedules"
+            select_edit_schedules: "Select and edit school schedules"
+            view_timetables: "View Timetables"
+            view_timetable_class: "View the timetable for a class"
+            institutional_timetable: "Institutional Timetable"
+            view_institutional_timetable: "View the entire timetable for a day"

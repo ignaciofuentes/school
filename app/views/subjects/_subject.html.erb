@@ -1,0 +1,14 @@
+<tr id="subject-<%= subject.id %>">
+	<td>
+		<%= subject.name %>
+	</td>
+	<td>
+		<%= subject.code %>
+	</td>
+	<td>
+		<%= link_to 'Edit', edit_course_subject_path(@course, subject), :remote=> true %>
+	</td>
+	<td>	
+		<%= link_to "Delete", [@course, subject], :method => :delete, :confirm => "Are you sure?" %>
+	</td>
+</tr>

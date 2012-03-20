@@ -1,0 +1,62 @@
+<%= content_for :breadcrumb do%>
+
+	<% end %>
+
+	<div class="container_12">
+		<div class="grid_1">
+			<%= image_tag("menu_icons/examinations.png") %>
+		</div>
+		<div class="grid_9">
+			<h1>Final Grades: <%= @student.full_name %></h1>
+		</div>
+		<%= render :partial => 'shared/back_button' %>	
+	</div>
+
+	<div class="clearfix">&nbsp;</div>
+
+
+	<div class="container_12">
+		<% unless flash[:notice].nil? %>
+		<p class="flash-msg"> <%= flash[:notice] %> </p>
+		<% end %>
+
+		<% unless flash[:warn_notice].nil? %>
+		<div id="errorExplanation" class="errorExplanation"><%= flash[:warn_notice] %> </div>
+		<% end %>
+
+		<div class="grid_3" id="menu_small">
+			<h2><%= t"general.options"%>:</h2>
+			<ul>
+				<%= render 'batches/batch_options' %>
+			</ul>
+		</div>
+
+		<div class="grid_9">
+			<h2>Grades</h2>
+			<table class="medium">	
+				<thead>
+					<tr>
+						<th>Subject Name</th>
+						<% @periods.each do |period|%>
+						<th><%= period.name%></th>
+						<% end %>
+						<th>Definitiva</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @batch_subjects.each do |batch_subject|%>
+					<tr>
+						<td><%= batch_subject.subject.name %></td>
+						<% @periods.each do |period|%>
+						<td><%= @student.grade_for_batch_subject_period(batch_subject, period)%></td>
+						<% end %>
+						<td><%= @student.grade_for_batch_subject(batch_subject)%></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+
+		</div>
+	</div>
+

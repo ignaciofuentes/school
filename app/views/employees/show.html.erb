@@ -1,0 +1,219 @@
+<%= content_for :breadcrumb do%>
+	<%= link_to 'Employees', :controller=>"employees" %> &raquo; <%=  @employee.full_name %> 
+	<% end %>
+	<%= content_for :head do%>
+	<script>
+	$(function() {
+		$( "#tabs" ).tabs();
+	});
+	</script>
+	<% end %>
+
+
+	<% current_username = @current_user.username %>
+	<% profile_employee_no = @employee.employee_number %>
+
+	<div class="container_12">
+		<div class="grid_1">
+			<img src="/images/HR/show_hr.png" alt="" />
+		</div>
+		<div class="grid_9">
+			<h1><%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %></h1>
+		</div>
+		<div class="grid_2">
+			<%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+		</div>	
+	</div>
+
+	<div class="clearfix">&nbsp;</div>
+
+	<div class="container_12">
+
+		<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+		<div class="grid_4">
+			<h2><%= t"profile.picture" %></h2>
+			<div id="profile_picture_display">
+				<% unless @employee.image.blank? %>
+				<%= image_tag @employee.image_url(:thumb) %>
+				<% else %>
+				<%= image_tag "misc/student.png" %>
+				<% end %>
+			</div>
+		</div>
+		<div class="grid_5">
+			<h2>Main Info</h2>
+			<div id ="student_main_info">
+				<h4> Employee ID. : <%= @employee.employee_number %> </h4>
+				<h3>Email: <%= @employee.email %></h3>
+				<br />
+				<h3>Phone: <%= @employee.home_phone %></h3>
+				<br />		 
+				<h3>Mobile: <%= @employee.mobile_phone %></h3>
+				<br />
+			</div>
+		</div>
+		<div class="grid_3" id="menu_small">
+			<h2>Options:</h2>
+			<ul>
+				<% if current_username == profile_employee_no %>
+				<li>
+					<a href="#">Salary  ▼</a>
+					<ul class="sub-menu">
+						<li id="menu-item-2" class="menu-item menu-item-type-post_type">
+							<%= link_to "Payroll", :url => {:action => "profile_payroll_details", :id => @employee.id}, :update => "profile-infos", :remote => true %>
+						</li>
+						<li id="menu-item-2" class="menu-item menu-item-type-post_type">
+							<%= link_to "Payslip", :url => {:action => "view_payslip", :id => @employee.id}, :update => "profile-infos", :remote => true %></li>
+						</ul>
+					</li>
+					<%else%>
+					<% if permitted_to? :payslip, :employee %>
+					<li>
+						<a href="#">Salary  ▼</a>
+						<ul class="sub-menu">
+							<li id="menu-item-2" class="menu-item menu-item-type-post_type">
+								<%= link_to "Payroll", :url => {:action => "profile_payroll_details", :id => @employee.id}, :update => "profile-infos", :remote => true %>
+							</li>
+							<li  id="menu-item-2" class="menu-item menu-item-type-post_type">
+								<%= link_to "Payslip", :url => {:action => "view_payslip", :id => @employee.id}, :update => "profile-infos", :remote => true %>
+							</li>
+						</ul>
+					</li>
+					<%end%>
+					<%end%>				
+
+					<% if current_username == profile_employee_no %>
+					<li>
+						<a href="#">Leaves  ▼</a>
+						<ul class="sub-menu">
+							<li id="menu-item-2" class="menu-item menu-item-type-post_type">
+								<%= link_to "Attendance", :url => {:action => "view_attendance", :id => @employee.id}, :update => "profile-infos", :remote => true %>
+							</li>
+							<li id="menu-item-2" class="menu-item menu-item-type-post_type">
+								<%= link_to "Leaves", :controller=>"employee_attendance", :action=>"leaves", :id=>@employee.id %>
+							</li>
+						</ul>
+					</li>
+					<% else %>
+					<% if permitted_to? :employee_attendance, :employee %>
+					<li>
+						<a href="#">Leaves &#9660;</a>
+						<ul class="sub-menu">
+							<li id="menu-item-2" class="menu-item menu-item-type-post_type">
+								<%= link_to "Attendance", :url => {:action => "view_attendance", :id => @employee.id}, :update => "profile-infos", :remote => true %>
+							</li>
+						</ul>
+					</li>
+
+					<%end%>
+					<%end%>
+
+					<% if permitted_to? :timetable, :employee %>
+					<li><%= link_to "Timetable", :controller=>"employee", :action=>"timetable", :id=>@employee.id %></li>
+					<%end%>
+					
+					<li><%= link_to "Subjects", assign_subjects_employee_path(@employee) %></li>
+				
+
+					<% if current_username == profile_employee_no %>
+					<% if @new_reminder_count.size == 0 %>
+					<li><%= link_to        "Reminder", :controller=>"reminder", :action=>"index"%></li>
+					<% else %>
+					<li><%= link_to        "Reminder(#{@new_reminder_count.size})", :controller=>"reminder", :action=>"index"%></li>
+					<% end %>
+					<%end%>
+					<% if @current_user.admin? %>
+					<li>
+						<%= link_to "Delete" ,:action=>'remove',:id=>@employee.id %>
+					</li>
+					<% end %>
+					<% if permitted_to? :change_reporting_manager, :employee %>
+					<li>
+						<%= link_to "► Edit",  :controller => "employee", :action => "edit1", :id =>@employee.id %>
+					</li>
+					<%end%>
+					<% if permitted_to?  :profile_pdf , :employee %>
+					<li>
+						<%= link_to " ► PDF Report",
+						{:controller => "employee", :action => "profile_pdf", :id => @employee.id},:target => '_blank', :class=> 'user_button' %>
+					</li>
+					<% end %>
+					<% if permitted_to? :change_reporting_manager, :employee %>
+					<li>
+						<%= link_to "change", :controller=> "employee", :action=> "change_reporting_manager", :id=>@employee.id %>
+					</li>
+					<%end%>
+				</ul>
+			</div>
+		</div>
+
+		<div class="clearfix">&nbsp;</div>
+
+		<div class="container_12">
+			<h2>General Details</h2>
+			<div class="grid_3 alpha">
+				<h3>Joining date</h3>
+				<h5><%= @employee.joining_date.strftime("%d %b,%Y")%></h5>
+				<h3>Grade</h3>
+				<h5> <%= @employee.employee_grade.name %> </h5>
+				<h3>Qualification</h3>
+				<h5><%= @employee.qualification %> </h5>
+			</div>
+			<div class="grid_3">
+				<h3>Department</h3>
+				<h5><%= @employee.employee_department.name%></h5>
+				<h3>Job title</h3>
+				<h5> <%= @employee.job_title %> </h5>
+				<h3>Status</h3>
+				<h5><%= @status %> </h5>
+			</div>
+			<div class="grid_3">
+				<h3>Category</h3>
+				<h5><%= @employee.employee_category.name %></h5>
+				<h3>Manager</h3>
+				<h5> <%= @reporting_manager %>
+					<h3>Total Experience</h3>
+					<h5><%= @total_years.to_s+"Years "+@total_months.to_s+"Months" %> </h5>
+				</div>
+				<div class="grid_3 omega">
+					<h3>Position 2</h3>
+					<h5> <%= @employee.employee_position.name %> </h5>
+					<h3>Gender</h3>
+					<h5> <%= @gender %> </h5>
+					<h3>Experience info</h3>
+					<h5><%= @employee.experience_detail %> </h5>
+				</div>
+			</div>
+			<div class="clearfix">&nbsp;</div>
+
+			<div class="container_12">
+				<h2>Personal Details</h2>
+				<div class="grid_3 alpha">
+				<h3>Date of Birth</h3>
+				<h5><%= @employee.date_of_birth%></h5>
+
+				<h3>Marital status</h3>
+				<h5><%= @employee.marital_status %></h5>
+
+				<h3>No. of children</h3>
+				<h5> <%= @employee.children_count %> </h5>
+				</div>
+<div class="grid_3">
+				<h3>Father's name</h3>
+				<h5> <%= @employee.father_name %> </h5>
+
+				<h3>Mother's name</h3>
+				<h5> <%= @employee.mother_name %> </h5>
+
+				<h3>Spouse name</h3>
+				<h5><%=  @employee.husband_name %></h5>
+				</div>
+				<div class="grid_3">
+				<h3>Blood group</h3>
+				<h5> <%= @employee.blood_group %> </h5>
+
+				<h3>Nationality</h3>
+				<h5><%= @employee.nationality.name %></h5>
+				</div>
+			</div>

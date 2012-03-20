@@ -1,0 +1,11 @@
+
+<h2>Add new class timing for <%=@schedule.name%>
+</h2>
+  <%= form_for [@schedule, ClassTiming.new], :html => {:remote=>true, :id=> "modal-form"} do |f| %>
+
+  <div id="form-errors"></div>
+
+    <%= render 'class_timings/class_timing_fields', :f => f %>
+
+  <% end %>
+

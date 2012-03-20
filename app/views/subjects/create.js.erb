@@ -1,0 +1,8 @@
+<%if @subject.new_record?%>
+	$("#form-errors").html('<%= escape_javascript(render 'shared/error_messages', :target => @subject) %>');
+	$("#modal-box").dialog("open");
+<% else %>
+		$("#normal_subjects").append('<%= escape_javascript(render 'subject', :subject => @subject, :batch=> @batch) %>');		
+		$("#modal-form")[0].reset();
+		behavior();
+<% end %>

@@ -1,0 +1,68 @@
+es:
+    login:
+        username: "Nombre de Usuario"
+    
+    configuration: "Configuracion"  
+
+    dashboard:
+        layout: "_layouts/dashboard_es"
+        main_heading: "Menu principal"
+        titles:
+            admission: "Admisión"
+            students: "Estudiantes"
+            users: "Usuarios"
+            news: "Noticias"
+            exams: "Exámenes"
+            timetable: "Horarios"
+            attendance: "Asistencia"
+            settings: "Configuración"
+            human_resources: "Recursos Humanos"
+            finance: "Finanzas"
+            courses: "Cursos"
+        buttons:
+            admission: "Ingrese los datos de admisión del estudiante"
+            students: "Buscar los registros de estudiantes antiguos y actuales"
+            users: "Manejar los usuarios del sistema"
+            news: "Ver o publicar noticias y anuncios colegiales"
+            exams: "Ver detalles y resultados de examenes"
+            timetable: "Módulo de manejo del horario"
+            attendance: "Manejo de asistencia estudiantil"
+            settings: "Configuración básica del sistema"
+            human_resources: "Departameto de Recursos Humanos"
+            finance: "Módulo de manejo de Finanzas"
+            courses: "Visualizar los cursos"
+
+    menu:
+        settings:
+            configuration: "Configuración"
+            manage_courses: "Administración Cursos"
+            manage_courses_sub: "Añadir un nuevo curso o promocion para este año académico" 
+            manage_student_categories: "Administrar las categorias estudiantiles"
+            manage_student_categories_sub: "Añadir una categoria estudiantil" 
+            general_settings: "Configuración General"
+            general_settings_sub: "Ajustar la configuración relacionada con la institución, asistencia, etc"
+            add_admission_details: "Detalles adicionales de la admisión"
+            add_admission_details_sub: "Administrar detalles adicionales de admisión"
+        
+        human_resources:
+            settings: "Configuración"
+            hr_settings: "Configuración de recursos humanos"
+            employee_admission: "Admisión de Empleados"
+            employee_admission_form: "Formulario para la creación de empleados"
+            employee_search: "Buscar Empleado"
+            search_employees: "Buscador de personal contratado"
+            employee_attendance: "Asisencia de Empleados"
+            manage_employee_attendance: "Manejar las asistencias y permisos de empleados"
+            create_payslip: "Generar Pago"
+            create_montly_payslip: "Generar pagos mensuales de los empleados"
+            employee_payslip: "Pagos de Empleados"
+            
+        timetable: 
+            create_edit: "Crear/Editar Horarios"
+            select_edit_timetable: "Select a class and edit the timetable for that class"
+            set_schedules: "Configurar Horarios"
+            select_edit_schedules: "Seleccionar y Editar los horarios del colegio"
+            view_timetables: "Ver Horarios"
+            view_timetable_class: "Ver Horario de una clase particular"
+            institutional_timetable: "Calendario Institucional"
+            view_institutional_timetable: "Ver el calendario de la institucion "

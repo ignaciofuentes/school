@@ -1,0 +1,139 @@
+<div class="container_12">
+<h2>Home Address</h2>
+        <div class="grid_6">
+		<p>
+          <label>Line 1</label>
+          <%= a.text_field :home_address_line1, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>Line 2</label>
+          <%= a.text_field :home_address_line2, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>City</label>
+          <%= a.text_field :home_city, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>State</label>
+          <%= a.text_field :home_state, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>Country</label>
+          <%= a.collection_select :home_country_id, Country.all, :id, :name, :selected => 191 %>
+
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>PIN</label>
+          <%= a.text_field :home_pin_code, :class=>"text" %>
+          </p>
+        </div>
+      <br/>
+</div>
+<div class="clearfix">&nbsp;</div>
+<div class="container_12">
+        <h2>Office Address</h2>
+
+        <div class="grid_6">
+	<p>
+          <label>Line 1</label>
+          <%= a.text_field :office_address_line1, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>Line 2</label>
+          <%= a.text_field :office_address_line2, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>City</label>
+          <%= a.text_field :office_city, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>State</label>
+          <%= a.text_field :office_state, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>Country</label>
+          <%= a.collection_select :office_country_id, Country.all, :id, :name, :selected => 191 %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>PIN</label>
+          <%= a.text_field :office_pin_code, :class=>"text" %>
+          </p>
+        </div>
+      <br/>
+</div>
+<div class="clearfix">&nbsp;</div>
+<div class="container_12">
+        <h2>Contact Details</h2>
+
+        <div class="grid_6">
+	<p>
+          <label>Office phone1</label>
+          <%= a.text_field :office_phone1, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>Office phone2</label>
+          <%= a.text_field :office_phone2, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>Mobile</label>
+          <%= a.text_field :mobile_phone, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>Home phone</label>
+          <%= a.text_field :home_phone, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>Email</label>
+          <%= a.text_field :email, :class=>"text" %>
+          </p>
+        </div>
+        
+        <div class="grid_6">
+	<p>
+          <label>FAX</label>
+          <%= a.text_field :fax, :class=>"text" %>
+          </p>
+        </div>
+</div>

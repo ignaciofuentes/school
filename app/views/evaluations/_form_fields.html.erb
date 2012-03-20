@@ -1,0 +1,28 @@
+
+	<div class="grid_6 alpha">
+		<p>
+			<%= f.label :name %>
+			<%= f.text_field :name, :class=>"text" %>
+		</p>
+		<p>
+			<%= f.label :description %>
+			<%= f.text_area :description, :class=>"small" %>
+		</p>
+	</div>
+
+
+	<div class="grid_6 omega">
+		<p>
+			<%= f.label :percentage %>( Ex: 25)
+			<%= f.text_field :percentage, :class=>"text" %>
+		</p>
+		<p>
+			<%= f.label :date %>
+			<%= f.text_field :date, :class=> "text date_picker" %>
+		</p>
+		<p>
+			<%= f.label :period_id %>
+			<%= f.collection_select :period_id, @periods, :id, :name, :class=>"select" %>
+		</p>
+	</div>
+

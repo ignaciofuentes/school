@@ -1,0 +1,12 @@
+	<h2><%= @course.full_name unless @course.nil? %></h2>
+
+  <%= form_for [@course, @subject], :html=> {:remote=> true} do |f| %>
+
+    
+  <div id="form-errors-edit">
+  </div>
+
+  <%= render 'subject_fields', :f => f %>
+   
+  <% end %>
+

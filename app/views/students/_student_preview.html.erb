@@ -1,0 +1,14 @@
+
+<% if students.nil? or students.empty? %>
+  <div id="no_result">No students found</div>
+<% else %>
+  <% students.each_with_index do |r, i| %>
+
+    <div class="grid_3">
+      <% link_value = r.first_name + " " + r.last_name %>
+      <%= link_to link_value, r%><br/>
+      <small><br/>Adm No.<%= r.unique_id %></small> <%= @st.to_s %>
+    </div>
+  <% end %>
+
+<% end %>

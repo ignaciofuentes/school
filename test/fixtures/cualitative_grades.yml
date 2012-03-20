@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cualitative_value_id: 1
+  student_id: 1
+  cualitative_gradeable_id: 1
+  cualitative_gradeable_type: MyString
+
+two:
+  cualitative_value_id: 1
+  student_id: 1
+  cualitative_gradeable_id: 1
+  cualitative_gradeable_type: MyString

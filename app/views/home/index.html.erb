@@ -1,0 +1,33 @@
+<div class="container_12">
+	<div class="grid_12">
+		<h1><%= t "dashboard.main_heading" %></h1>
+	</div>
+</div>
+
+<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+<div class="grid_12" id="icondock">
+
+	<ul>
+		<% if @user.admin? %>
+
+		<%= render :partial => 'admin_dashboard' %>
+
+		<% elsif @user.student? %>
+
+		<%= render :partial => 'student_dashboard' %>
+
+		<% elsif @user.guardian? %>
+
+		<%= render :partial => 'guardian_dashboard' %>
+
+		<% else @user.employee? %>
+
+		<%= render :partial => 'employee_dashboard' %>
+
+		<% end %>       
+
+	</ul>
+
+</div>
+

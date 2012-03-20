@@ -1,0 +1,20 @@
+<div id="content-header">
+ <img src="/images/HR/show_hr.png" alt="" />
+  <h1>Employee Settings</h1>
+  <h3>Edit category</h3>
+  <div id="app-back-button">
+     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+
+<div id="page-yield">
+
+    <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <%= render :partial => 'category_form', :locals => { :button_label => "► Update"} %>
+
+
+</div>

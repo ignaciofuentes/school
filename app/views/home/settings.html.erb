@@ -1,0 +1,59 @@
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag("menu_icons/settings.png") %>
+	</div>
+	<div class="grid_9">
+			<h1><%= t"menu.settings.configuration"%></h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+
+<% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+<div class="container_12">
+	<div class="grid_12" id="icondock_small">
+
+		<ul>
+		
+			<li>
+				<%= link_to  (courses_path) do %>
+					<%= t"menu.settings.manage_courses"%>
+					<span><%= t"menu.settings.manage_courses_sub"%></span>
+					<% end %>
+			</li>
+		
+			
+			<li>
+				<%= link_to :controller => "student", :action => "categories" do %>
+				<%= t"menu.settings.manage_student_categories"%>
+				<span><%= t"menu.settings.manage_student_categories_sub"%></span>
+				
+			</li>
+			<% end %>
+
+		
+			<li>
+				<%= link_to :action => "settings" do %>
+					<%= t"menu.settings.general_settings"%>
+					<span><%= t"menu.settings.general_settings_sub"%></span>
+					<% end %>
+			</li>
+			
+
+			
+			<li>
+				<%= link_to :controller=>"student", :action => "add_additional_details" do %>
+				<%= t"menu.settings.add_admission_details"%>
+				<span><%= t"menu.settings.add_admission_details_sub"%></span>
+				<% end %>
+			</li>
+		
+		</ul>
+
+
+	</div>

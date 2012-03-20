@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  evaluation_id: 1
+  student_id: 1
+  value: 9.99
+
+two:
+  evaluation_id: 1
+  student_id: 1
+  value: 9.99

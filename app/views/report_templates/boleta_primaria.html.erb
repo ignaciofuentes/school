@@ -1,0 +1,10 @@
+
+<div id="title">
+Hola <%= @report_template.name%>
+</div>
+
+<% @students.each do |student|%>
+<div class="student_report">
+<%= student.full_name%>
+</div>
+	<%end%>

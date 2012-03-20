@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  relationship_type_id: 1
+  student_id: 1
+  guardian_id: 1
+
+two:
+  relationship_type_id: 1
+  student_id: 1
+  guardian_id: 1

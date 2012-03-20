@@ -1,0 +1,52 @@
+<div class="container_12">
+	<div class="grid_1">
+		<img src="/images/show_settings.png" />
+	</div>
+	<div class="grid_9">
+		<h1>Student Settings</h1>
+	</div>
+	<div class="grid_2">
+		<%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+	</div>	
+</div>
+<div class="clearfix">&nbsp;</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+    <%= form_for :additional_field do |c| -%>
+<h2>Add Additional Details</h2>
+<%= render 'shared/error_messages', :target => @additional_field %>
+     
+        <div class="grid_6">
+          <label for="category_name">Name</label>
+          <%= c.text_field :name, :class=>"text" %>
+        </div>
+
+        <div class="grid_6">
+	<p>
+          <label class="status" for="status">Status</label>
+
+            <%= c.radio_button  "status", "true", :checked => "checked" %>
+            <label class="label_for_status" for="add_grade_status_true">Active</label>
+            <%= c.radio_button  "status", "false" %>
+            <label class="label_for_status" for="add_grade_status_false">Inactive</label>
+</p>
+        </div>
+
+		<div class="clearfix">&nbsp;</div>
+		<hr />
+		<div class="grid_4">
+			<%= c.submit :value => "► Save", :class => "submit" %>
+
+			<% end %>
+		</div>
+
+    <div class="category-list">
+      <%= render :partial => "additional_fields" %>
+    </div>
+
+</div>

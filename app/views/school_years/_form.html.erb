@@ -1,0 +1,38 @@
+<%= form_for(@school_year) do |f| %>
+  <% if @school_year.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@school_year.errors.count, "error") %> prohibited this school_year from being saved:</h2>
+
+      <ul>
+      <% @school_year.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </div>
+<p>
+	<%= f.label :status%>
+	<%= f.radio_button  :status, SchoolYear::ACTIVE %>
+	<%= f.label :status, "Active", :value => SchoolYear::ACTIVE %>			
+	<%= f.radio_button  :status, SchoolYear::INACTIVE %>
+	<%= f.label :status, "Inactive", :value => SchoolYear::INACTIVE  %>
+	<%= f.radio_button  :status, SchoolYear::UPCOMING %>
+	<%= f.label :status, "Upcoming", :value => SchoolYear::UPCOMING  %>
+</p>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

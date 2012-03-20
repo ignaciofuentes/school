@@ -1,0 +1,19 @@
+<div id="content-header">
+  <img src="/images/HR/show_hr.png" alt="" />
+  <h1>Employee Settings</h1>
+  <h3>Add position</h3>
+  <div id="app-back-button">
+     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+ <%= render :partial => 'position_form', :locals => { :button_label => "► Create"} %>
+
+
+  <div id="position-list">
+    <%= render :partial => "position" %>
+  </div>
+
+</div>

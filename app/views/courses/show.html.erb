@@ -1,0 +1,62 @@
+<%= content_for :breadcrumb do%>
+
+<%= link_to t("courses.courses_title"), :controller=>"courses" %> &raquo; <%= @course.name %>
+
+	<% end %>
+
+	<div class="container_12">
+		<div class="grid_1">
+			<%= image_tag "menu_icons/courses.png" %>
+		</div>
+		<div class="grid_9">
+			<h1><%= @course.name %></h1>
+		</div>
+		<%= render :partial => 'shared/back_button' %>	
+	</div>
+
+	<div class="clearfix">&nbsp;</div>
+
+	<div class="container_12">
+		<% unless flash[:notice].nil? %>
+		<%= render "shared/highlighted_messages", :msg=> flash[:notice]%>
+		<% end %>
+
+
+		<% unless flash[:warn_notice].nil? %>
+		<%= render "shared/highlighted_messages", :msg => flash[:warn_notice] %> 
+		<% end %>
+
+		<div class="grid_3" id="menu_small">
+			<h2><%= t"general.options"%>:</h2>
+			<ul>
+				<li>
+					<%= link_to t("general.new"), new_course_batch_path(@course) %>
+				</li>
+				<li>
+					<%= link_to t("courses.course_subjects"), course_subjects_path(@course) %>
+				</li>
+			</ul>
+		</div>
+
+		<div class="grid_9">
+
+			<h2 class="center"><%= @course.name %> <%= t"batches.batches" %></h2>
+			<table class="medium">
+				<thead>
+					<tr>
+						<th colspan="3">
+							<%= t"batches.batch_name" %>
+						</th>
+					</tr>
+				</thead>
+				<% @batches.each do |batch| %>
+				<tr>
+					<td><%= link_to batch.school_year.name, [@course, batch] %></td>
+					<td><%= link_to t("general.edit"), edit_course_batch_path(@course, batch) if permitted_to? :edit, :batches %></td>
+					<td><%= link_to(t("general.delete"), [@course, batch], :method => :delete, :confirm => 'Are you sure?')  if permitted_to? :destroy, :batches %></td>
+				</tr>
+				<% end %>
+
+			</table>
+		</div>
+	</div>

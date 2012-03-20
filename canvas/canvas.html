@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Untitled Page</title>
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="jcanvas.min.js"></script>
+    <!--[if lt IE 9]><script src="flashcanvas.js"></script><![endif]-->
+    <script type="text/javascript">
+        $(function () {
+            $("canvas").drawPolygon({
+                fillStyle: "#69a",
+                x: 100, y: 100,
+                radius: 50,
+                sides: 5,
+                angle: 25
+            });
+        });
+    </script>
+</head>
+<body>
+    <canvas width="300" height="500"></canvas>
+</body>
+</html>

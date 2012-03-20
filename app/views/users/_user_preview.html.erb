@@ -1,0 +1,17 @@
+
+<% if users.nil? or users.empty? %>
+ <div id="user_no_result">No users found</div>
+<% else %>
+  <% users.each_with_index do |r,i| %>
+    <div id="user_ajax_result">
+    <% link_text = r.full_name %>
+    <%# unless link_text == " " %>
+      <%# link_text = " (" + link_text + ")" %>
+    <%# end %>
+    <% link_text = "#{r.username} (#{r.full_name})" %>
+    <%= link_to link_text, :controller => 'users', :action => 'profile', :id => r.username %> <br/>
+    <small>Role: <b><%= r.role_name %></b></small>
+    </div>
+  <%'<div class="extender"></div>' if i%4 == 3 %>
+  <% end %>
+<% end %>

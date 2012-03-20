@@ -1,0 +1,11 @@
+<div class="small-form">
+<h4>Edit Period for <%=@evaluation_structure.name%></h4>
+  <%= form_for [@evaluation_structure, @period], :remote=>true do |f| %>
+
+  <div id="form-errors-edit"></div>
+
+    <%= render 'periods/period_fields', :f => f %>
+
+
+  <% end %>
+</div>

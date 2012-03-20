@@ -1,0 +1,15 @@
+<div class="container_12">
+<h5> Fields marked with <strong>*</strong> must be filled.</h5>
+</div>
+<div class="clearfix">&nbsp;</div>
+
+<div class="container_12">
+
+<%= a.fields_for :user do |u| %>
+
+	<%= render "users/user_fields", :u=> u %>
+	
+  <% end  %>
+</div>
+
+<div class="clearfix">&nbsp;</div>

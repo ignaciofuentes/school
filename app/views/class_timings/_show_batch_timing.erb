@@ -1,0 +1,18 @@
+
+<div class="linker">
+  <%= link_to 'Add', :url => { :action => 'new', :id => @batch }, :remote => true %>
+</div>
+
+<table id="class-timings-list" width="100%">
+  <tr class="tr-head">
+    <td>Name</td>
+    <td>Start time</td>
+    <td>End time</td>
+    <td>Operations</td>
+  </tr>
+  <% @class_timings.each do |class_timing| %>
+    <%= render :partial => 'class_timing' %>
+
+  <% end %>
+</table>
+

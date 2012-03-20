@@ -1,0 +1,7 @@
+<%if !@class_timing.valid?%>
+	$("#form-errors-edit").html('<%= escape_javascript(render 'shared/error_messages', :target => @class_timing) %>');
+	$("#modal-box-edit").dialog("open");
+<% else %>
+		$("#class-timing-<%= @class_timing.id%>").replaceWith('<%= escape_javascript(render @class_timing) %>');		
+		$("#modal-form")[0].reset();
+<% end %>

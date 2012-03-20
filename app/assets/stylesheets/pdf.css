@@ -1,0 +1,41 @@
+
+	body{
+		
+	}
+	
+	#display_none{
+		display:none;
+	}
+	
+	#header{
+		display:none;
+	}
+	
+	#sub_nav{
+		display:none;
+	}
+	
+	#menu_small{
+		display:none;
+	}
+	
+	#menu_icon{
+		display:none;
+	}
+	
+	#back_button{
+		display:none;
+	}
+	
+	#footer{
+		text-align:center;
+	}
+	
+	#title{
+		color:black;
+		background-color:red;
+		font-size:250%;
+	}
+	.student_report{
+		page-break-before: always;
+	}

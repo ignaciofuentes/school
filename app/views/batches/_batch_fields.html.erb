@@ -1,0 +1,34 @@
+<div class="grid_6">
+<p>
+<%= f.label :school_year_id %>
+<br />
+<%=f.collection_select :school_year_id, SchoolYear.all,:id, :name, {:prompt => 'Select school year' }, :class=> "select" %>	
+
+</p>
+
+
+<p>
+	<%= f.label :section_name %>
+<br />
+	<%= f.text_field :section_name, :class=> "text" %>
+</p>
+<p>
+	<%= f.label :code %>
+	<br />
+	<%= f.text_field :code, :class=> "text" %>
+</p>
+</div>
+<div class="grid_6">
+
+<p>
+	<%= f.label :schedule %>
+	<br />
+	<%=f.collection_select :schedule_id, Schedule.all,:id, :name, {:prompt => 'Select schedule' }, :class=> "select" %>	
+</p>
+
+<p>
+	<%= f.label :evaluation_structure %>
+	<br />
+	<%=f.collection_select :evaluation_structure_id, EvaluationStructure.all,:id, :name, {:prompt => 'Select Evaluation Structure' }, :class=> "select" %>	
+</p>
+</div>

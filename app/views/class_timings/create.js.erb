@@ -1,0 +1,7 @@
+<%if @class_timing.new_record?%>
+	$("#form-errors").html('<%= escape_javascript(render 'shared/error_messages', :target => @class_timing) %>');
+	$("#modal-box").dialog("open");
+<% else %>
+		$("#class-timings-list-body").html('<%= escape_javascript(render 'class_timings_table', :c => @class_timings ) %>');		
+		$("#modal-form")[0].reset();
+<% end %>

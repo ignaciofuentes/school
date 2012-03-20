@@ -1,0 +1,6 @@
+<%if @timetable_entry.new_record?%>
+	$("#errors").html('<%= escape_javascript(render 'shared/error_messages', :target => @timetable_entry) %>');
+<% else %>
+	$("tr[data-classtiming-id = <%= @timetable_entry.class_timing_id %>]").children("td[data-weekday-id =<%= @timetable_entry.weekday_id %>]").html("<%= escape_javascript(render "timetable_entry", :e=> @timetable_entry) %>");
+	$("#msg").html('<%= escape_javascript(render 'shared/highlighted_messages', :msg => @timetable_entry.batch_subject.subject.name + " assigned succesfully") %>');
+<% end %>

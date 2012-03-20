@@ -1,0 +1,13 @@
+<div class="small-form">
+<h4>Edit class timing for
+<%=@schedule.name%>
+</h4>
+  <%= form_for [@schedule, @class_timing], :html => {:remote=>true} do |f| %>
+
+  <div id="form-errors-edit"></div>
+
+    <%= render 'class_timings/class_timing_fields', :f => f %>
+
+
+  <% end %>
+</div>

@@ -1,0 +1,43 @@
+<div id="content-header">
+  <img src="/images/show_news/show_news_logo.png" />
+  <h1>Timetable</h1>
+  <h3>Set class timings</h3>
+  <div id="app-back-button">
+    <%= link_to image_tag("/images/buttons/back.png", :border => 0), "history.back()"  %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+    <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+
+    <% unless flash[:warn_notice].nil? %>
+    <div id="errorExplanation" class="errorExplanation"><p><%= flash[:warn_notice] %> </p></div>
+  <% end %>
+
+ <div class="box">
+ <div class="bread_crumb">
+
+        <%= link_to 'Class Timings', class_timings_path %> &raquo;
+        </div>
+<h4 align="center">Class Timings</h4>
+
+<ul class="category-list small">
+
+    <% @class_timings.each do |c| %>
+      <li>
+        <div class="category-name"><%= link_to c.name, c %></div>
+        <div class="category-edit"><%= link_to 'Edit', edit_class_timing_path(c) if permitted_to? :edit, :class_timing %></div><div class="category-delete">
+		<%= link_to('Delete', c, :method => :delete, :confirm => 'Are you sure?') if permitted_to? :destroy, :class_timing %>
+		</div>
+      </li>
+     <% end %>
+
+</ul>
+  <div class="extender"></div>
+  </div>
+</div>
+

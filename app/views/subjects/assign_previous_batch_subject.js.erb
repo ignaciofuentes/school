@@ -1,0 +1,10 @@
+alert("<%= @test %>")
+<% if @subject_new.new_record?%>
+$("#msg").empty();
+$("#errors").html("<%= escape_javascript(render 'shared/generic_error_box', :msg => "Batch #{@subject_new.batch.name} already has the subject with name  #{@subject_new.name}") %>");
+<% else %>
+$("#errors").empty();
+$('#prev-subject-name-<%= @previous_subject.id%>').empty();
+$("#normal_subjects").append('<%= escape_javascript(render 'subjects/subject', :subject => @subject_new) %>');
+$('#msg').html("<%= escape_javascript(render 'shared/highlighted_messages', :msg => "Batch #{@subject_new.name} has been added to #{@subject_new.batch.name}") %>");
+<% end %>

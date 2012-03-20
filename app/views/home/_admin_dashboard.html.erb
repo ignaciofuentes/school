@@ -1,0 +1,35 @@
+<li>
+	<%= link_to image_tag("dashboard_icons/admission.png") + t("dashboard.titles.admission"), new_student_path,  {:title => t("dashboard.buttons.admission")}%>
+</li>
+<li>
+	<%= link_to image_tag("dashboard_icons/student_details.png") + t("dashboard.titles.students"), students_path, {:title => t("dashboard.buttons.students")}%>
+</li>
+<li>
+	<%= link_to image_tag("dashboard_icons/manage_users.png") + t("dashboard.titles.users"), {:controller => "users", :action => "index"}, {:title => t("dashboard.buttons.users")}%>
+</li>
+<li>
+	<%= link_to image_tag("dashboard_icons/news.png") + t("dashboard.titles.news"), {:controller => "news", :action => "index"}, {:title => t("dashboard.buttons.news")}%>
+</li>
+<li>
+	<%= link_to image_tag("dashboard_icons/examinations.png") + t("dashboard.titles.exams"), {:controller => "emails", :action => "index"}, {:title => t("dashboard.buttons.exams")}%>
+</li>
+<li>
+	<%= link_to image_tag("dashboard_icons/timetable.png") + t("dashboard.titles.timetable"), {:controller => "home", :action => "timetable"}, {:title => t("dashboard.buttons.timetable")}%>
+</li>
+<li>
+	<%= link_to image_tag("dashboard_icons/attendance.png") + t("dashboard.titles.attendance"), {:controller => "student_attendance", :action => "index"}, {:title => t("dashboard.buttons.attendance")}%>
+</li>
+<li>
+	<%= link_to image_tag("dashboard_icons/courses.png") + t("dashboard.titles.courses"), courses_path, {:title => t("dashboard.buttons.courses")}%>
+</li>      
+<li>
+	<%= link_to image_tag("dashboard_icons/settings.png") + t("dashboard.titles.settings"), {:controller => "home", :action => "settings"}, {:title => t("dashboard.buttons.settings")}%>
+</li>
+
+<li>
+	<%= link_to image_tag("dashboard_icons/human_resources.png") + t("dashboard.titles.human_resources"), {:controller => "home", :action => "hr"}, {:title => t("dashboard.buttons.human_resources")}%>
+</li>
+
+<li>
+	<%= link_to image_tag("dashboard_icons/finance.png") + t("dashboard.titles.finance"), {:controller => "finance", :action => "index"}, {:title => t("dashboard.buttons.finance")}%>
+</li>

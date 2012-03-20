@@ -1,0 +1,101 @@
+<%= content_for :breadcrumb do%>
+<%= link_to 'Students', :controller=>"students" %> &raquo; <%=  @student.full_name %> 
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<img src="/images/student_details/student_details_logo.jpg" />
+	</div>
+	<div class="grid_9">
+		<h1>Guardians of <%= @student.first_name %> <%= @student.middle_name %> <%= @student.last_name %></h1>
+	</div>
+	<div class="grid_2">
+		<%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+	</div>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+<div class="container_12">
+	<div class="grid_3">
+		<h2>Parents/Guardian:</h2>
+		<ul>
+			<% @guardians.each do |p| %>
+			<li>
+				<a href="#guardian-details-id-<%= p.id %>">
+					<%= p.first_name %> <%= p.last_name %>
+				</a>
+				(<%= p.relation %>)
+			</li>
+			<% end %>
+		</ul>
+	</div>	
+
+	<div class="grid_5">
+		<h2>Student Info</h2>
+		<h3><%= @student.first_name %> <%= @student.middle_name %> <%= @student.last_name %><h3>
+			<h3>Course & Batch: <%= @student.batch.course.name %><h3>
+				<h3>Adm no : <%= @student.unique_id %><h3>
+				</div>
+
+				<div class="grid_3" id="menu_small">
+					<h2>Options:</h2>
+					<ul>
+						<li><%= link_to "Student profile", :controller => 'student', :action => 'profile', :id => @student.id %></li>
+						<% if permitted_to? :add_guardian, :student %>
+						<li><%= link_to "Add guardian", :controller => 'student', :action => 'add_guardian', :id => @student.id %></li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
+
+			<div class="clearfix">&nbsp;</div>
+
+			<div class="container_12">	
+
+				<% @guardians.each do |p| %>
+				<h2>
+					<%= p.first_name %> <%= p.last_name %> (<%= p.relation %>)
+					<% if permitted_to? :edit_guardian,:student %>
+					<%= link_to "Edit", :controller => 'student', :action => 'edit_guardian', :id => p.id %>
+					<%  end %>
+					<% if permitted_to? :del_guardian,:student %>
+					<%  if @student.guardians.size > 1 %>
+					<%= link_to "► Delete",{:controller => 'student', :action => 'del_guardian', :id => p.id }, {:confirm => 'Are you completely sure?'} %>
+					<%end %>
+					<% end %>
+				</h2>
+				<a name="guardian-details-id-<%= p.id %>"> </a>
+
+				<div class="grid_3">
+					<h3>Date of birth</h3>
+					<h5><%= p.dob.strftime('%d %B, %Y') unless p.dob.nil? %></h5>
+					<h3>Mobile phone</h3>
+					<h5><%= p.mobile_phone %> </h5> 
+				</div>
+
+				<div class="grid_3">
+					<h3>Email</h3>
+					<h5><%= p.email %></h5>
+					<h3>Address</h3>
+					<h5><%= p.office_address_line1%>,<%= p.office_address_line2%> 
+						<%= p.city %> <%= p.state %> <%= p.country.name %> </h5> 
+					</div>
+
+					<div class="grid_3">
+						<h3>Phone 1</h3>
+						<h5><%= p.office_phone1 %></h5>
+						<h3>Income</h3>
+						<h5><%= p.income %>
+						</div>
+
+						<div class="grid_3"> 
+							<h3>Phone 2</h3>
+							<h5><%= p.office_phone2 %></h5>
+							<h3>Occupation</h3>
+							<h5><%= p.occupation %></h5> 
+						</div>
+						<% end %>
+					</div>

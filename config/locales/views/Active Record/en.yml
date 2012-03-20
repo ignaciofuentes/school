@@ -1,0 +1,61 @@
+en:
+    activerecord:
+        models:
+            batch: Promocion
+            schedule: Schedule
+            student: Student
+            user: User
+            guardian: Guardian
+        attributes:
+            batch:
+                name: "Name"
+                section_name: "Section Name"
+                start_date: "Start Date"
+                end_date: "End Date"
+                code: "Code"
+                schedule: "Schedule"
+            students:
+                unique_id: "Unique Id"
+                admission_date: "Admission Date"
+                first_name: "First Name"
+                middle_name: "Middle Name"
+                last_name: "Last Name"
+                date_of_birth: "Date of birth"
+                gender: "Gender"
+                course_and_batch: "Course & Batch"
+                blood_group: "Blood group"
+                birth_place: "Birth place"
+                nationality: "Nationality"
+                category: "Category"
+                religion: "Religion"
+                address_line1: "Address Line 1"
+                address_line2: "Address Line 2"
+                city: "City"
+                state: "State"
+                pin_code: "Postal Code"
+                country_id: "Country"
+                phone1: "Phone 1"
+                phone2: "Phone 2"
+                email: "Email"
+            user:
+                username: "Username"
+                password: "Password"
+                language_id: "Language"
+            guardian:
+                first_name: "First Name"
+                middle_name: "Middle Name"
+                last_name: "Last Name"
+                dob: "Date of Birth"
+                education: "Education"
+                occupation: "Occupation"
+                income: "Income"
+                email: "Email"
+                relationship_type_id: "Relationship Type"
+                office_address_line1: "Office Addres Line 1"
+                office_address_line2: "Office Addres Line 2"
+                city: "City"
+                state: "State"
+                country_id: "Country"
+                office_phone1: "Office Phone 1"
+                office_phone2: "Office Phone 2"
+                mobile_phone: "Mobile Phone"

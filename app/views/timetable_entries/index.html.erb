@@ -1,0 +1,100 @@
+<%= content_for :breadcrumb do%>
+<%= link_to 'Settings', :controller=>"configuration" %> &raquo; <%= link_to 'Courses', courses_path %> &raquo; <%= link_to @batch.course.name, @course %> &raquo; <%= link_to @batch.name %> &raquo; Schedule
+<% end %>
+
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag "menu_icons/timetable.png" %>
+	</div>
+	<div class="grid_9">
+		<h1><%= @batch.full_name%></h1>
+		<h3>Set time table entries</h3>
+	</div>
+	<%= render :partial => 'shared/back_button' %>	
+</div>
+
+<div class="clearfix">&nbsp;</div>
+
+<div class="container_12">
+
+	<% unless flash[:notice].nil? %>
+    	<%= render "shared/highlighted_messages", :msg => flash[:notice]%>
+  	<% end %>
+   <div id="msg"></div>
+   <div id="errors"></div>
+
+<h2 align="center">Schedule</h2>
+
+<div id="calendar">
+	<table>
+		<thead>
+			<tr>
+			<th>Period</th>
+			<% Weekday.all.each do |w|%>
+				<th><%= t w.weekday %></th>
+				<% end %>
+			</tr>	
+		</thead>
+		<tbody>
+	<% @batch.schedule.class_timings.each do |t|%>
+	<tr data-classtiming-id="<%= t.id %>" class="break-<%= t.is_break %>">
+		<td>	
+			<%= t.name %>
+			<p class="small"><%= t.start_time.strftime("%I:%M %p") %> - <%= t.end_time.strftime("%I:%M %p") %></p>
+		</td>
+		<% Weekday.all.each do |w|%>
+		<% e = @entries.where(:class_timing_id => t.id, :weekday_id => w.id )
+			exists= e.exists?
+		%>
+		<td data-weekday-id="<%= w.id %>" class="<%= "droppable" if((!t.is_break) && (!exists))%>">			
+			<% if exists%>
+			<%= render "timetable_entries/timetable_entry", :e=> e.first %>	
+			<% end %>
+			
+		</td>
+				<% end %>
+	</tr>
+	
+	
+	<%end%>
+		</tbody>
+	</table>
+	</div>
+	<ul>
+		<% @batch_subjects.each do |batch_subject|%>
+			<li class="draggable" data-subject-id="<%= batch_subject.id%>">
+			<%= batch_subject.subject.name%>
+			</li>
+		<%end%>
+	</ul>
+</div>
+
+<div id="modal-box">	
+
+</div>
+
+<%= content_for :head do%>
+<script type="text/javascript">
+
+$(function(){
+	$(".draggable").button();
+	$(".draggable").draggable({
+		revert:true
+	});
+	$("#modal-box").modalBox("Assign Teacher", "► Assign Teacher");
+	$(".droppable").droppable({
+		hoverClass:"ui-state-error",
+		drop: function(event,ui){
+			var weekday_id =  $(this).attr("data-weekday-id");
+			var class_timing_id = $(this).parent().attr("data-classtiming-id");
+			var batch_subject_id = $(ui.draggable).attr("data-subject-id");
+			$.post('<%= batch_timetable_entries_path(@batch)%>', 
+			{class_timing_id:class_timing_id,batch_subject_id:batch_subject_id,weekday_id:weekday_id} )
+		}
+	});
+})
+
+</script>
+<% end %>
+
+

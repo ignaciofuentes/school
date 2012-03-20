@@ -1,0 +1,26 @@
+<%= content_for :breadcrumb do%>
+	<%= link_to  t("students.students"), students_path %> &raquo;<%= link_to  @student.full_name, @student%> &raquo; <%= link_to t("students.guardians"), student_relationships_path(@student.id)%> &raquo; <%= t"general.new" %> 
+<% end %>
+<div class="container_12">
+	<div class="grid_1">
+		<%= image_tag("menu_icons/parents.png") %>
+	</div>
+	<div class="grid_9">
+		<h1><%= t"guardian.new_guardian" %></h1>
+	</div>
+	<%= render :partial => 'shared/back_button' %>	
+</div>
+<div class="clearfix">&nbsp;</div>
+
+
+<div class="container_12">
+
+	<% unless flash[:notice].nil? %>
+	<p class="flash-msg"> <%= flash[:notice] %> </p>
+	<% end %>
+<%= render 'shared/error_messages', :target => @relationship %>
+
+	<%= render "guardians/guardian_form"%>
+	
+
+</div>
